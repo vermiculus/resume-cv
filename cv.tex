@@ -1,0 +1,172 @@
+\documentclass[11pt,letterpaper]{article}
+\usepackage{hyperref}
+\usepackage[margin={.75in,.5in}]{geometry}
+
+\usepackage{titlesec} % For pretty sectioning
+
+% Make sections look pretty
+\titleformat{\section}
+{\vspace{-.8em}\titlerule%
+ \vspace{.8ex}%
+ \Large\itshape}
+{\thesection}{.25em}{\vspace{-1.5ex}}
+
+\newcommand{\position}[5]{\item%
+  \begin{tabular*}{1.0\linewidth}{l@{\extracolsep{\fill}}r}
+    #1 & #2\\
+    \textit{#3} & \textit{#4---#5}
+  \end{tabular*}}
+
+\renewcommand{\position}[5]{\item%
+  \textbf{#1}, #3, #2\hfill \textit{#4--#5}
+}
+
+\makeatletter
+\newcommand{\phone}[1]{\def\@phone{#1}}
+\newcommand{\email}[1]{\def\@email{#1}}
+\newcommand{\photo}[1]{\usepackage{graphicx}\def\@photo{#1}}
+\newcommand{\address}[2]{\def\@addressA{#1}\def\@addressB{#2}}
+\newcommand{\namestyle}[1]{\def\@namestyle{#1}}
+\namestyle{\Large}
+\newcommand{\emailstyle}[1]{\def\@emailstyle{#1}}
+\emailstyle{\ttfamily}
+
+\renewcommand{\maketitle}{%
+  \noindent
+  \ifdefined\@photo
+  \usepackage{multirow}
+  \begin{tabular*}{1.0\linewidth}{l@{\extracolsep{\fill}}r}
+    \multirow{2}{*}{\includegraphics[width=2in]{\@photo}}\\
+     {\@namestyle\@author}           & \@addressA\\
+    {\@emailstyle\@email} (\@phone)  & \@addressB
+  \end{tabular*}
+  \else
+  \begin{tabular*}{1.0\linewidth}{l@{\extracolsep{\fill}}r}
+     {\@namestyle\@author}           & \@addressA\\
+    {\@emailstyle\@email} (\@phone)  & \@addressB
+  \end{tabular*}
+  \fi
+}
+\makeatother
+
+
+\newcommand{\cwc}{\href{http://www.cwcare.net}{Capital Women's Care}}
+
+
+\newcommand{\software}[1]{\textsl{#1}}
+\newcommand{\course}[1]{\textit{#1}}
+
+\namestyle{\Large\bfseries\itshape}
+\emailstyle{\rmfamily}
+
+\author{Sean Edward Allred}
+\address{1123 Linden Ave.}{Baltimore, MD. 21227}
+\email{seallred@smcm.edu}
+\phone{443.904.1576}
+
+\pagestyle{empty}
+\begin{document}
+\maketitle
+
+\section*{Education}
+\begin{itemize}
+\position {\href{http://www.smcm.edu}
+                {St. Mary's College of Maryland}}
+          {\href{http://dl.dropbox.com/u/17471132/transcript20130330.pdf}
+                {GPA $3.53$}}
+          {Computer Science, Mathematics}
+          {2010}{Present}
+          \begin{itemize}
+          \item Key Courses: \course{Data Structures and Algorithms},
+            \course{Computer Architecture}, \course{Programing
+              Languages}, \course{Software Engineering} \course{Theory
+              of Computation}, \course{Operations Research},
+            \course{Set Theory}, \course{Calculus I, II, III},
+            \course{Real Analysis}.
+          \item Teaching Assistant
+            \begin{itemize}
+            \item Mentored students in objected-oriented design, data
+              structures, and algorithms.
+            \item Organized and conducted weekly review sessions.
+            \item Created written tutorials for students.
+            \item Regularly graded small projects for all the students.
+            \end{itemize}
+          \end{itemize}
+
+\position {\href{http://www.ucd.ie}
+                {University College Dublin}}
+          {GPA ???} % TODO CHECK ME
+          {Semester Abroad}
+          {January 2013}{May 2013}
+          \begin{itemize}
+          \item Course-load: \course{Metric Spaces},
+            \course{Introduction to Irish Language}, \course{Ireland
+              Uncovered}, \course{Introduction to Research in Computer
+              Science}.
+          \end{itemize}
+\end{itemize}
+
+\section*{Experience}
+\begin{itemize}
+\position \cwc
+          {Silver Spring, MD}
+          {Video Editing}
+          {2012}{Present}
+          \begin{itemize}
+          \item Leveraging \software{Camtasia Studio},
+            Adobe~\software{After~Effects} and
+            Adobe~\software{Premiere~Pro} to edit, master, and produce
+            a curriculum of professional-grade training videos.
+          \item Organized an index and on-line corpus of these training
+            videos using \LaTeX{} and
+            \href{http://www.mindflash.com/}{Mindflash}.
+          \item Trained staff on the basic, effective use of
+            \software{Camtasia Studio}.
+          \end{itemize}
+
+\position \cwc
+          {Silver Spring, MD}
+          {Software Developer}
+          {2008}{2011}
+          \begin{itemize}
+          \item Developed and maintained .NET applications to increase
+            efficiency in the dissemination of information from
+            multiple offices in the tri-state area.
+          \end{itemize}
+
+\position {\href{http://oit.smcm.edu}
+                {St. Mary's College of Maryland}}
+          {St. Mary's County, MD}
+          {Student Technician}
+          {2010}{2013}
+          \begin{itemize}
+          \item On-site network, hardware, and software support for a
+            heterogeneous network of both Windows (Dell) and Apple
+            computers.
+          \end{itemize}
+
+\position {\href{http://www.cwcare.net/Provider.aspx?pid=1269}
+                {Dr. Ruthann Zern}}
+          {Towson, MD}
+          {Document Management}
+          {2009}{2011}
+\end{itemize}
+
+\section*{Skills}
+  \begin{description}
+  \item[Languages] C, C++, Objective~C, C\#~.NET, C++~.NET, Java,
+    Visual~Basic~.NET, Python, \software{Mathematica}, Common~Lisp,
+    \software{Emacs}~Lisp, Scheme, F\#~.NET, Bash, DOS, \TeX.
+
+  \item[Software] \software{Emacs}, Microsoft
+    \software{Word}, \software{Excel}, \software{Powerpoint},
+    \software{Publisher}, \software{OneNote}, and \software{Outlook},
+    their Google counterparts where applicable, \software{Eclipse},
+    and \software{Visual Studio} 2008--2012.
+
+  \item[Operating Systems] Windows (proficient), Mac OSX (proficient),
+    Linux Ubuntu.
+
+  \item[Technologies] XML, HTML, CSS, JSON, \LaTeX{}, \texttt{git}.
+  \end{description}
+\end{document}

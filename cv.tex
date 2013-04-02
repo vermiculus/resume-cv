@@ -1,15 +1,9 @@
 \documentclass[11pt,letterpaper]{article}
 \usepackage{hyperref}
+\hypersetup{colorlinks=true}
 \usepackage[margin={.75in,.5in}]{geometry}
 
 \usepackage{titlesec} % For pretty sectioning
-
-% Make sections look pretty
-\titleformat{\section}
-{\vspace{-.8em}\titlerule%
- \vspace{.8ex}%
- \Large\itshape}
-{\thesection}{.25em}{\vspace{-1.5ex}}
 
 \newcommand{\position}[5]{\item%
   \begin{tabular*}{1.0\linewidth}{l@{\extracolsep{\fill}}r}
@@ -50,6 +44,14 @@
 \makeatother
 
 
+
+% Make sections look pretty
+\titleformat{\section}
+{\vspace{-.75em}\titlerule%
+ \vspace{.8ex}%
+ \Large\itshape}
+{\thesection}{.25em}{\vspace{-1ex}}
+
 \newcommand{\cwc}{\href{http://www.cwcare.net}{Capital Women's Care}}
 
 
@@ -64,21 +66,23 @@
 \email{seallred@smcm.edu}
 \phone{443.904.1576}
 
+\newcommand{\smcm}{\href{http://www.smcm.edu}
+                        {St. Mary's College of Maryland}}
+
 \pagestyle{empty}
 \begin{document}
 \maketitle
 
 \section*{Education}
 \begin{itemize}
-\position[] {\href{http://www.smcm.edu}
-                {St. Mary's College of Maryland}}
+\position[] {\smcm}
           {\href{http://dl.dropbox.com/u/17471132/transcript20130330.pdf}
                 {GPA $3.53$}}
           {Computer Science, Mathematics}
           {2010}{Present}
           \begin{description}
           \item[Key Courses] \course{Data Structures and Algorithms},
-            \course{Computer Architecture}, \course{Programing
+            \course{Computer Architecture}, \course{Programming
               Languages}, \course{Software Engineering} \course{Theory
               of Computation}, \course{Operations Research},
             \course{Set Theory}, \course{Calculus I, II, III},
@@ -111,7 +115,7 @@
           \end{itemize}
 
 \position {Teaching Assistant}
-          {St. Mary's College of Maryland}
+          {\smcm}
           {Computer Science}
           {2011}{Present}
           \begin{itemize}
@@ -127,6 +131,8 @@
           {Software Developer}
           {2008}{2011}
           \begin{itemize}
+          \item Formalized requirements gathered from the client to
+            remove ambiguities and establish scope.
           \item Developed and maintained .NET applications to increase
             efficiency in the dissemination of information from
             multiple offices in the tri-state area.
@@ -138,9 +144,13 @@
           {Student Technician}
           {2010}{2013}
           \begin{itemize}
-          \item On-site network, hardware, and software support for a
-            heterogeneous network of both Windows (Dell) and Apple
-            computers.
+          \item Supported clients in the use of the network and their
+            software, troubleshooting both software and hardware
+            problems on both Windows (Dell) and Apple computers.
+          \item Inventoried and organized the property of the
+            Department from an existing state of disarray.
+          \item Prepared aged hardware for release within the security
+            specifications of the State of Maryland.
           \end{itemize}
 
 \position {\href{http://www.cwcare.net/Provider.aspx?pid=1269}
@@ -148,6 +158,10 @@
           {Towson, MD}
           {Document Management}
           {2009}{2011}
+
+          \begin{itemize}
+          \item Stuff here?
+          \end{itemize}
 \end{itemize}
 
 \section*{Skills}

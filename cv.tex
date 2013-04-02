@@ -17,9 +17,9 @@
     \textit{#3} & \textit{#4---#5}
   \end{tabular*}}
 
-\renewcommand{\position}[5]{\item%
-  \textbf{#1}, #3, #2\hfill \textit{#4--#5}
-}
+\renewcommand{\position}[6][\textbullet]{%
+\item[#1] \hspace*{-2em}\textbf{#2}, #4, #3\hfill
+  \textit{#5--#6}\vspace*{-.8em}}
 
 \makeatletter
 \newcommand{\phone}[1]{\def\@phone{#1}}
@@ -70,40 +70,25 @@
 
 \section*{Education}
 \begin{itemize}
-\position {\href{http://www.smcm.edu}
+\position[] {\href{http://www.smcm.edu}
                 {St. Mary's College of Maryland}}
           {\href{http://dl.dropbox.com/u/17471132/transcript20130330.pdf}
                 {GPA $3.53$}}
           {Computer Science, Mathematics}
           {2010}{Present}
-          \begin{itemize}
-          \item Key Courses: \course{Data Structures and Algorithms},
+          \begin{description}
+          \item[Key Courses] \course{Data Structures and Algorithms},
             \course{Computer Architecture}, \course{Programing
               Languages}, \course{Software Engineering} \course{Theory
               of Computation}, \course{Operations Research},
             \course{Set Theory}, \course{Calculus I, II, III},
             \course{Real Analysis}.
-          \item Teaching Assistant
-            \begin{itemize}
-            \item Mentored students in objected-oriented design, data
-              structures, and algorithms.
-            \item Organized and conducted weekly review sessions.
-            \item Created written tutorials for students.
-            \item Regularly graded small projects for all the students.
-            \end{itemize}
-          \end{itemize}
-
-\position {\href{http://www.ucd.ie}
-                {University College Dublin}}
-          {GPA ???} % TODO CHECK ME
-          {Semester Abroad}
-          {January 2013}{May 2013}
-          \begin{itemize}
-          \item Course-load: \course{Metric Spaces},
-            \course{Introduction to Irish Language}, \course{Ireland
-              Uncovered}, \course{Introduction to Research in Computer
-              Science}.
-          \end{itemize}
+          \item[Semester Abroad] \href{http://www.ucd.ie}{University
+              College Dublin} from \textit{January 2013--May 2013}.
+          \item[Research] Working under Dr. P\'adraig Cunningham of
+            UCD in named-entity recognition as part of
+            \textit{Introduction to Research in Computer Science}.
+          \end{description}
 \end{itemize}
 
 \section*{Experience}
@@ -122,6 +107,18 @@
             \href{http://www.mindflash.com/}{Mindflash}.
           \item Trained staff on the basic, effective use of
             \software{Camtasia Studio}.
+          \end{itemize}
+
+\position {Teaching Assistant}
+          {St. Mary's College of Maryland}
+          {Computer Science}
+          {2011}{Present}
+          \begin{itemize}
+          \item Mentored students in objected-oriented design, data
+            structures, and algorithms.
+          \item Organized and conducted weekly review sessions.
+          \item Created written tutorials for students.
+          \item Regularly graded small projects for all the students.
           \end{itemize}
 
 \position \cwc

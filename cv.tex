@@ -1,6 +1,5 @@
 \documentclass[11pt,letterpaper]{article}
-\usepackage{hyperref}
-\hypersetup{colorlinks=true}
+\usepackage[colorlinks=true,linkcolor=black,urlcolor=black]{hyperref}
 \usepackage[margin={.75in,.5in}]{geometry}
 
 \usepackage{titlesec} % For pretty sectioning
@@ -49,7 +48,7 @@
 \titleformat{\section}
 {\vspace{-.75em}\titlerule%
  \vspace{.8ex}%
- \Large\itshape}
+ \Large\itshape\bfseries}
 {\thesection}{.25em}{\vspace{-1ex}}
 
 \newcommand{\cwc}{\href{http://www.cwcare.net}{Capital Women's Care}}
@@ -58,11 +57,11 @@
 \newcommand{\software}[1]{\textsl{#1}}
 \newcommand{\course}[1]{\textit{#1}}
 
-\namestyle{\Large\bfseries\itshape}
+\namestyle{\LARGE\bfseries\itshape}
 \emailstyle{\rmfamily}
 
-\author{Sean Edward Allred}
-\address{1123 Linden Ave.}{Baltimore, MD. 21227}
+\author{Sean Allred}
+\address{1123 Linden Avenue}{Baltimore, MD. 21227}
 \email{seallred@smcm.edu}
 \phone{443.904.1576}
 
@@ -78,17 +77,17 @@
 \position[] {\smcm}
           {\href{http://dl.dropbox.com/u/17471132/transcript20130330.pdf}
                 {GPA $3.53$}}
-          {Computer Science, Mathematics}
-          {2010}{Present}
+          {Computer Science}
+          {2010}{(2014)}
           \begin{description}
           \item[Key Courses] \course{Data Structures and Algorithms},
             \course{Computer Architecture}, \course{Programming
-              Languages}, \course{Software Engineering} \course{Theory
-              of Computation}, \course{Operations Research},
-            \course{Set Theory}, \course{Calculus I, II, III},
-            \course{Real Analysis}.
+              Languages}, \course{Software Engineering},
+            \course{Theory of Computation}, \course{Operations
+              Research}, \course{Set Theory}, \course{Calculus I, II,
+              III}, \course{Real Analysis}.
           \item[Semester Abroad] \href{http://www.ucd.ie}{University
-              College Dublin} from \textit{January 2013--May 2013}.
+              College Dublin}\hfill \textit{Spring 2013}
           \item[Research] Working under Dr. P\'adraig Cunningham of
             UCD in named-entity recognition and social network
             analysis in English literature as part of
@@ -98,44 +97,32 @@
 
 \section*{Experience}
 \begin{itemize}
-\position \cwc
+\position {\cwc}
           {Silver Spring, MD}
           {Video Editing}
           {2012}{Present}
           \begin{itemize}
           \item Leveraging \software{Camtasia Studio},
-            Adobe~\software{After~Effects} and
+            Adobe~\software{After~Effects}, and
             Adobe~\software{Premiere~Pro} to edit, master, and produce
             a curriculum of professional-grade training videos.
           \item Organized an index and on-line corpus of these training
             videos using \LaTeX{} and
             \href{http://www.mindflash.com/}{Mindflash}.
-          \item Trained staff on the basic, effective use of
+          \item Trained staff on the basic and effective use of
             \software{Camtasia Studio}.
           \end{itemize}
 
-\position {Teaching Assistant}
-          {\smcm}
-          {Computer Science}
+\position {\smcm}
+          {\href{http://www.smcm.edu/mathcs}{Math\&CS}}
+          {Teaching Assistant}
           {2011}{Present}
           \begin{itemize}
-          \item Mentored students in objected-oriented design, data
+          \item Mentored students in object-oriented design, data
             structures, and algorithms.
           \item Organized and conducted weekly review sessions.
           \item Created written tutorials for students.
           \item Regularly graded small projects for all the students.
-          \end{itemize}
-
-\position \cwc
-          {Silver Spring, MD}
-          {Software Developer}
-          {2008}{2011}
-          \begin{itemize}
-          \item Formalized requirements gathered from the client to
-            remove ambiguities and establish scope.
-          \item Developed and maintained .NET applications to increase
-            efficiency in the dissemination of information from
-            multiple offices in the tri-state area.
           \end{itemize}
 
 \position {\href{http://oit.smcm.edu}
@@ -148,19 +135,38 @@
             software, troubleshooting both software and hardware
             problems on both Windows (Dell) and Apple computers.
           \item Inventoried and organized the property of the
-            Department from an existing state of disarray.
+            Department.
           \item Prepared aged hardware for release within the security
             specifications of the State of Maryland.
           \end{itemize}
 
 \position {\href{http://www.cwcare.net/Provider.aspx?pid=1269}
                 {Dr. Ruthann Zern}}
-          {Towson, MD}
-          {Document Management}
+          {Towson, MD (\href{http://www.stjosephtowson.com/}
+                            {St. Joseph's Hospital})}
+          {Office Assistant}
           {2009}{2011}
-
           \begin{itemize}
-          \item Stuff here?
+          \item Converted incoming paper medical reports and records
+            into an electronic format.
+          \item Designed and implemented a more efficient system for
+            organizing incoming mail.
+          \item Fulfilled odd jobs around the office as they came up,
+            such as moving crates of medical charts into position for
+            storage, or refiling medical charts that had gone into a
+            different category.
+          \end{itemize}
+
+\position {\cwc}
+          {Silver Spring, MD}
+          {Software Developer}
+          {2008}{2011}
+          \begin{itemize}
+          \item Formalized requirements gathered from the client to
+            remove ambiguities and establish scope.
+          \item Developed and maintained .NET applications to increase
+            efficiency in the dissemination of information from
+            multiple offices in the tri-state area.
           \end{itemize}
 \end{itemize}
 
@@ -168,17 +174,17 @@
   \begin{description}
   \item[Languages] C, C++, Objective~C, C\#~.NET, C++~.NET, Java,
     Visual~Basic~.NET, Python, \software{Mathematica}, Common~Lisp,
-    \software{Emacs}~Lisp, Scheme, F\#~.NET, Bash, DOS, \TeX.
+    \software{Emacs}~Lisp, Scheme, \TeX
 
   \item[Software] \software{Emacs}, Microsoft
     \software{Word}, \software{Excel}, \software{Powerpoint},
     \software{Publisher}, \software{OneNote}, and \software{Outlook},
     their Google counterparts where applicable, \software{Eclipse},
-    and \software{Visual Studio} 2008--2012.
+    and \software{Visual Studio} 2008--2012
 
   \item[Operating Systems] Windows (proficient), Mac OSX (proficient),
-    Linux Ubuntu.
+    Linux, Red~Hat Enterprise Linux 5
 
-  \item[Technologies] XML, HTML, CSS, JSON, \LaTeX{}, \texttt{git}.
+  \item[Technologies] XML, HTML, CSS, JSON, \LaTeX{}, \texttt{git}
   \end{description}
 \end{document}

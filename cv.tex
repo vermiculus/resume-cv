@@ -1,207 +1,224 @@
-\documentclass[11pt,a4paper]{article}
-\usepackage[hidelinks]{hyperref}
-\usepackage[margin={.75in,.5in}]{geometry}
+\documentclass{bettercv}
 \usepackage{microtype}
-\usepackage{titlesec} % For pretty sectioning
+\usepackage{xspace}
+\usepackage[margin=1.2in]{geometry}
+\usepackage[hidelinks]{hyperref}
 
-\newcommand{\position}[5]{\item%
-  \begin{tabular*}{1.0\linewidth}{l@{\extracolsep{\fill}}r}
-    #1 & #2\\
-    \textit{#3} & \textit{#4---#5}
-  \end{tabular*}}
-
-\renewcommand{\position}[6][]{%
-\item[#1] \hspace*{-2em}\textbf{#4}, #2, #3\hfill
-  \textit{#5--#6}\vspace*{-.8em}}
-
-\makeatletter
-\newcommand{\phone}[1]{\def\@phone{#1}}
-\newcommand{\email}[1]{\def\@email{#1}}
-\newcommand{\photo}[1]{\usepackage{graphicx}\def\@photo{#1}}
-\newcommand{\address}[2]{\def\@addressA{#1}\def\@addressB{#2}}
-\newcommand{\namestyle}[1]{\def\@namestyle{#1}}
-\namestyle{\Large}
-\newcommand{\emailstyle}[1]{\def\@emailstyle{#1}}
-\emailstyle{\ttfamily}
-
-\renewcommand{\maketitle}{%
-  \noindent
-  \ifdefined\@photo
-  \usepackage{multirow}
-  \begin{tabular*}{1.0\linewidth}{l@{\extracolsep{\fill}}r}
-    \multirow{2}{*}{\includegraphics[width=2in]{\@photo}}\\
-     {\@namestyle\@author}           & \@addressA\\
-    {\@emailstyle\@email} (\@phone)  & \@addressB
-  \end{tabular*}
-  \else
-  \begin{tabular*}{1.0\linewidth}{l@{\extracolsep{\fill}}r}
-     {\@namestyle\@author}           & \@addressA\\
-    {\@emailstyle\@email} (\@phone)  & \@addressB
-  \end{tabular*}
-  \fi
+\ContactInformation{
+  street = 1123 Linden Ave.,
+  city   = Baltimore,
+  state  = MD,
+  zip    = 21227,
+  name   = Sean Allred,
+  phone  = 443-904-1576,
 }
-\makeatother
 
+\newcommand \course[1]   {\textit{#1}}
+\newcommand \software[1] {\textsl{#1}}
 
+\newcommand{\DeclareSecretLink}[3]{\newcommand #1 {\href{#2}{#3}\xspace}}
 
-% Make sections look pretty
-\titleformat{\section}
-{\vspace{-.75em}\titlerule%
- \vspace{.8ex}%
- \Large\itshape\bfseries}
-{\thesection}{.25em}{\vspace{-1ex}}
+\DeclareSecretLink \smcm       {http://www.smcm.edu}        {St. Mary's College}
+\DeclareSecretLink \smcmmathcs {http://www.smcm.edu/mathcs} {St. Mary's College \Dash Math \& CS}
+\DeclareSecretLink \smcmoit    {http://oit.smcm.edu}        {St. Mary's College \Dash Office of Information Technology}
+\DeclareSecretLink \cwc        {http://www.cwcare.net}      {Capital Women's Care}
+\DeclareSecretLink \ucd        {http://www.ucd.ie}          {University College Dublin}
+\DeclareSecretLink \mindflash  {http://www.mindflash.com}   {Mindflash}
 
-\newcommand{\cwc}{\href{http://www.cwcare.net}{Capital Women's Care}}
+\newcommand \CPP        {{C\nolinebreak[4]\hspace{-.05em}\raisebox{.4ex}{\tiny\bf ++}}}
+\newcommand \CSharp     {{C\#}}
+\newcommand \Lisp       {{\textsc{Lisp}}}
 
+\setcounter{secnumdepth}{0}
 
-\newcommand{\software}[1]{\textsl{#1}}
-\newcommand{\course}[1]{\textit{#1}}
-
-\namestyle{\LARGE\bfseries\itshape}
-\emailstyle{\rmfamily}
-
-\author{Sean Allred}
-\address{1123 Linden Avenue}{Baltimore, MD. 21227}
-\email{seallred@smcm.edu}
-\phone{443.904.1576}
-
-\newcommand{\smcm}{\href{http://www.smcm.edu}
-                        {St. Mary's College of Maryland}}
-
-\pagestyle{empty}
 \begin{document}
-\maketitle
+\section{Education}
+\begin{position}
+  {
+    company = St. Mary's College,
+    date    = \daterange*{2010}{2014},
+    state   = MD,
+    city    = Lexington Park,
+    title   = Major \Dash {Computer Science, B.\,S.},
+  }
 
-\section*{Education}
-\begin{itemize}
-\position[] {\smcm}
-          {\href{http://dl.dropbox.com/u/17471132/transcript20130330.pdf}
-                {GPA $3.53$}}
-          {Computer Science}
-          {2010}{(2014)}
-          \begin{description}
-          \item[Key Courses]
-            \course{Data Structures and Algorithms},
-            \course{Computer Architecture},
-            \course{Programming Languages},
-            \course{Software Engineering},
-            \course{Theory of Computation},
-            \course{Operations Research},
-            \course{Set Theory},
-            \course{Calculus I, II, III},
-            \course{Real Analysis},
-            \course{Metric Spaces}.
-          \item[Semester Abroad] \href{http://www.ucd.ie}{University College Dublin}\hfill \textit{Spring 2013}
-          \item[Research] Working under Dr. P\'adraig Cunningham of UCD in named-entity recognition and social network analysis in English literature as part of \course{Introduction to Research in Computer Science}.
-          \end{description}
-\end{itemize}
+\begin{description}
+\item[Key Courses]
+  \course{Data Structures and Algorithms},
+  \course{Computer Architecture},
+  \course{Programming Languages},
+  \course{Software Engineering},
+  \course{Theory of Computation},
+  and \course{Operations Research}
+\item[Research] Worked (\daterange{Jan.}{May}[2013]) under
+  Dr.\,P\'adraig~Cunningham of \ucd in named-entity recognition and
+  social network analysis in English literature.
+%  as part of \course{Introduction to Research in Computer Science}.
+\item[Research] Working under Dr.\,Alan~Jamieson in modeling and
+  simulating self-stabilizing algorithms.
+\end{description}
+\end{position}
 
-\section*{Experience}
-\begin{itemize}
-\position {Progeny Systems, Inc.}
-          {California, MD}
-          {Intern}
-          {2013}{Present}
-          \begin{itemize}
-          \item Created, documented, and maintained several infrastructure components.
-          \item Generated a skeleton graphical interface to a \textsc{cli} (YASCA) with Java.
-          \item Virtualized existing infrastructure components with nominal down-time.
-          \item Acquired expository experience for a range of topics including
-            networks,
-            databases,
-            server setup, and
-            remote administration.
-          \end{itemize}
+\begin{position}
+  {
+    company = St. Mary's College,
+    date    = \daterange*{2010}{2014},
+    state   = MD,
+    city    = Lexington Park,
+    title   = Minor \Dash Mathematics,
+  }
 
-\position {\smcm}
-          {\href{http://www.smcm.edu/mathcs}{Math\&CS}}
-          {Teaching Assistant}
-          {2011}{Present}
-          \begin{itemize}
-          \item Mentored students in object-oriented design, data structures, and algorithms.
-          \item Organized and conducted weekly review sessions.
-          \item Created written tutorials for students.
-          \item Regularly graded small projects for all the students.
-          \end{itemize}
-
-\position {\cwc}
-          {Silver Spring, MD}
-          {Video Editing}
-          {2012}{2013}
-          \begin{itemize}
-          \item Leveraging \software{Camtasia Studio},
-            Adobe~\software{After~Effects}, and
-            Adobe~\software{Premiere~Pro} to edit, master, and produce
-            a curriculum of professional-grade training videos.
-          \item Organized an index and online corpus of these training videos using \LaTeX{} and \href{http://www.mindflash.com/}{Mindflash}.
-          \item Trained staff on the basic and effective use of \software{Camtasia Studio}.
-          \end{itemize}
-
-\position {\href{http://oit.smcm.edu}
-                {St. Mary's College of Maryland}}
-          {St. Mary's County, MD}
-          {Student Technician}
-          {2010}{2013}
-          \begin{itemize}
-          \item Supported clients in the use of the network and their software,
-            troubleshooting both software and hardware problems on both Windows (Dell) and Apple computers.
-          \item Inventoried and organized the property of the Department.
-          \item Prepared aged hardware for release within the security specifications of the State of Maryland.
-          \end{itemize}
-
-\position {\cwc}
-          {Silver Spring, MD}
-          {Software Developer}
-          {2008}{2011}
-          \begin{itemize}
-          \item Formalized requirements gathered from the client to remove ambiguities and establish scope.
-          \item Developed and maintained .NET applications to increase efficiency in the dissemination of information from multiple offices in the tri-state area.
-          \end{itemize}
-\end{itemize}
-
-\section*{Skills}
   \begin{description}
-  \item[Languages]
-    C,
-    C++,
-    Objective~C,
-    C\#~.NET,
-    C++~.NET,
-    Java,
-    Visual~Basic~.NET,
-    Python,
-    \software{Mathematica},
-    Common~Lisp\slash Scheme,
-    \software{Emacs}~Lisp,
-    \TeX,
-    and \LaTeX3
-
-  \item[Software] \software{Emacs},
-    Microsoft \software{Word},
-              \software{Excel},
-              \software{Powerpoint},
-              \software{Publisher},
-              \software{OneNote}, and
-              \software{Outlook},
-    their Google counterparts where applicable,
-    \software{Eclipse},
-    and \software{Visual Studio 2008--2013}
-
-  \item[Operating Systems] Windows (proficient),
-    Mac OSX (proficient),
-%    General Linux,
-    Red~Hat Enterprise Linux 5\slash 6
-
-  \item[Technologies] XML,
-    HTML,
-    CSS,
-    JSON,
-    \LaTeX{},
-    \texttt{git}
+  \item[Key Courses]
+    \course{Set Theory},
+    \course{Calculus I, II, III},
+    \course{Real Analysis},
+    and \course{Metric Spaces}
   \end{description}
+\end{position}
+
+\section{Professional Experience}
+
+% todo server room admin
+
+\begin{position}
+  {
+    company = {Progeny Systems, Inc.},
+    date    = \daterange{May}{Sept.}[2013],
+    city    = California,
+    state   = MD,
+    title   = Intern,
+  }
+
+\begin{itemize}
+\item Created, documented, and maintained several infrastructure components.
+\item Generated a skeleton graphical interface to a \textsc{cli} (YASCA) with Java.
+\item Virtualized existing infrastructure components with nominal down-time.
+\item Acquired expository experience for a range of topics including
+  networks,
+  databases,
+  server setup, and
+  remote administration.
+\end{itemize}
+\end{position}
+
+\begin{position}
+  {
+    company = \smcmmathcs,
+    city    = St. Mary's City,
+    state   = MD,
+    title   = Teaching Assistant,
+    date    = \daterange{2011}{Present},
+  }
+
+\begin{itemize}
+\item Mentored students in object-oriented design, data structures, and algorithms.
+\item Organized and conducted weekly review sessions.
+\item Created written tutorials for students.
+\item Regularly graded small projects for all the students.
+\end{itemize}
+\end{position}
+
+\begin{position}
+  {
+    company = \cwc,
+    city    = Silver Spring,
+    state   = MD,
+    title   = Video Editing,
+    date    = \daterange{2012}{2013},
+  }
+
+\begin{itemize}
+\item Leveraged \software{Camtasia Studio},
+  Adobe~\software{After~Effects}, and
+  Adobe~\software{Premiere~Pro} to edit, master, and produce
+  a curriculum of professional-grade training videos.
+\item Organized an index and online corpus of these training videos using \LaTeX{} and \mindflash.
+\item Trained staff on the basic and effective use of \software{Camtasia Studio}.
+\end{itemize}
+\end{position}
+
+\begin{position}
+  {
+    company = \smcmoit,
+    city    = St. Mary's,
+    state   = MD,
+    title   = Student Technician,
+    date    = \daterange{2010}{2013},
+  }
+
+\begin{itemize}
+\item Supported clients in the use of the network and their software,
+  troubleshooting both software and hardware problems on both Windows (Dell) and Apple computers.
+\item Inventoried and organized the property of the Department.
+\item Prepared aged hardware for release within the security specifications of the State of Maryland.
+\end{itemize}
+\end{position}
+
+\begin{position}
+  {
+    company = \cwc,
+    city    = Silver Spring,
+    state   = MD,
+    title   = Software Developer,
+    date    = \daterange{2008}{2011},
+  }
+
+\begin{itemize}
+\item Formalized requirements gathered from the client to remove ambiguities and establish scope.
+\item Developed and maintained .NET applications to increase efficiency in the dissemination of information from multiple offices in the tri-state area.
+\end{itemize}
+\end{position}
+
+\section{Skills}
+
+\begin{description}
+\item[Languages]
+  C,
+  \CPP,
+  Objective~C,
+  \CPP~.NET,
+  \CSharp~.NET,
+  Java,
+  Visual~Basic~.NET,
+  Python,
+  \software{Mathematica},
+  \software{Emacs}~\Lisp\slash
+            Common~\Lisp\slash
+            Scheme,
+  \TeX,
+  and \LaTeX3
+
+\item[Software]
+  \software{Emacs},
+  Microsoft \software{Word},
+            \software{Excel},
+            \software{Powerpoint},
+            \software{Publisher},
+            \software{OneNote},
+            and \software{Outlook},
+  their Google counterparts where applicable,
+  \software{Eclipse},
+  and \software{Visual Studio 2008--2013}
+
+\item[Operating Systems]
+  Windows (proficient),
+  Mac OSX (proficient),
+  % General Linux,
+  Red~Hat Enterprise Linux 5\slash 6
+
+\item[Technologies]
+  XML\slash
+  HTML,
+  CSS,
+  JSON,
+  \LaTeX,
+  and \texttt{git}
+\end{description}
 \end{document}
 
-% Local Variables:
-% TeX-PDF-mode: t
-% TeX-engine: xetex
-% End:
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: t
+%%% TeX-PDF-mode: t 
+%%% End: 

@@ -89,8 +89,7 @@
 
   \group_begin:
   \keys_set:nn { resume / position } { #1 }
-  \setlength \tabcolsep { 0pt }
-  \begin{tabular*}{\textwidth}{l@{\extracolsep{\fill}}r}
+  \begin{tabular*}{\textwidth}{@{}l@{\extracolsep{\fill}}r@{}}
     {\itshape \l_resume_position_title_tl}
     &
     {\l_resume_position_company_tl} \\[0.5ex]

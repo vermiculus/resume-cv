@@ -89,6 +89,7 @@
 
   \group_begin:
   \keys_set:nn { resume / position } { #1 }
+  \setlength \tabcolsep { 0pt }
   \begin{tabular*}{\textwidth}{l@{\extracolsep{\fill}}r}
     {\itshape \l_resume_position_title_tl}
     &
@@ -137,8 +138,10 @@
 }
 
 \def\Dash{\unskip\thinspace\textemdash\thinspace\ignorespaces}
+
+\pagestyle{empty}
 % Local Variables:
 % TeX-PDF-mode: t
-% TeX-master: "test.tex"
+% TeX-master: "cv.tex"
 % TeX-engine: xetex
 % End:

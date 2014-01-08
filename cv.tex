@@ -2,7 +2,11 @@
 \usepackage{microtype}
 \usepackage{xspace}
 \usepackage[margin=1.2in]{geometry}
+\usepackage{todo}
 \usepackage[hidelinks]{hyperref}
+
+\usepackage{enumitem}
+\setlist[itemize]{itemsep=1pt,topsep=1pt}
 
 \ContactInformation{
   street = 1123 Linden Ave.,
@@ -33,7 +37,7 @@
 \setcounter{secnumdepth}{0}
 
 \begin{document}
-\section{Education}
+\section{Education and Academic Experience}
 \begin{position}
   {
     company = St. Mary's College,
@@ -66,7 +70,7 @@
     date    = \daterange*{2010}{2014},
     state   = MD,
     city    = Lexington Park,
-    title   = Minor \Dash Mathematics,
+    title   = Minor \Dash Mathematics\todo{Perhaps remove this node and change the degree to B.\,S.~Computer Science (with Mathematics minor), or should I even bother mentioning the minor?},
   }
 
   \begin{description}
@@ -97,7 +101,6 @@
 
 \section{Professional Experience}
 
-% todo server room admin
 \begin{position}
   {
     company = \smcmmathcs,
@@ -110,6 +113,7 @@
 \begin{itemize}
 \item Applied skills from internship to a more complex and undocumented existing system
 \item Prepared and implemented a documentation server using \redmine.
+\item \todo{add details}
 \end{itemize}
 \end{position}
 
@@ -126,6 +130,7 @@
 \item Created, documented, and maintained several infrastructure components.
 \item Generated a skeleton graphical interface to a \textsc{cli} (YASCA) with Java.
 \item Virtualized existing infrastructure components with nominal down-time.
+\item Responded to and resolved a non-critical emergency swiftly with minimal down-time.\todo{Should I include this?}
 \item Acquired expository experience for a range of topics including
   networks,
   databases,
@@ -192,10 +197,10 @@
   C,
   \CPP,
   Objective~C,
-  \CPP~.NET,
-  \CSharp~.NET,
+  \CPP\,.NET,
+  \CSharp\,.NET,
   Java,
-  Visual~Basic~.NET,
+  Visual~Basic\,.NET,
   Python,
   \software{Mathematica},
   \software{Emacs}~\Lisp\slash
@@ -230,6 +235,9 @@
   \LaTeX,
   and \texttt{git}
 \end{description}
+
+\appendix
+\todos
 \end{document}
 
 %%% Local Variables: 

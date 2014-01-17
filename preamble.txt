@@ -1,0 +1,11 @@
+This document was created automatically with LaTeX.
+
+If you are reading this as a person, I urge you to look at 
+the PDF provided (if available). It is much prettier. :)
+
+If you like, you may view the source for this document on GitHub: 
+
+    http://www.github.com/vermiculus/resume-cv
+
+
+

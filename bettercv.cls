@@ -8,6 +8,7 @@
 
 \keys_define:nn { resume / options } {
   textout .tl_set:N = \l_resume_output_text_tl,
+  textout preamble .tl_set:N = \l_resume_output_text_preamble_tl
 }
 
 \ProcessKeysOptions{ resume / options }
@@ -17,70 +18,20 @@
 \RequirePackage{hyperref}
 
 \tl_if_empty:NF \l_resume_output_text_tl {
-  \iow_new:N \l_resume_output_text_iow
-  \iow_open:Nn \l_resume_output_text_iow { \l_resume_output_text_tl }
-  \iow_now:Nx \l_resume_output_text_iow {
-    This          \c_space_tl
-    document      \c_space_tl
-    was           \c_space_tl
-    created       \c_space_tl
-    automatically \c_space_tl
-    with          \c_space_tl
-    LaTeX.
-                  \iow_newline:
-                  \iow_newline:
-    If            \c_space_tl
-    you           \c_space_tl
-    are           \c_space_tl
-    reading       \c_space_tl
-    this          \c_space_tl
-    as            \c_space_tl
-    a             \c_space_tl
-    person,       \c_space_tl
-    I             \c_space_tl
-    urge          \c_space_tl
-    you           \c_space_tl
-    to            \c_space_tl
-    look          \c_space_tl
-    at            \c_space_tl\iow_newline:
-    the           \c_space_tl
-    PDF           \c_space_tl
-    provided      \c_space_tl
-    (if           \c_space_tl
-    available).   \c_space_tl
-    It            \c_space_tl
-    is            \c_space_tl
-    much          \c_space_tl
-    prettier.     \c_space_tl
-    :)
-                  \iow_newline:
-                  \iow_newline:
-    If            \c_space_tl
-    you           \c_space_tl
-    like,         \c_space_tl
-    you           \c_space_tl
-    may           \c_space_tl
-    view          \c_space_tl
-    the           \c_space_tl
-    source        \c_space_tl
-    for           \c_space_tl
-    this          \c_space_tl
-    document      \c_space_tl
-    on            \c_space_tl
-    GitHub:       \c_space_tl
-                  \iow_newline:
-                  \iow_newline:
-    \c_space_tl\c_space_tl\c_space_tl\c_space_tl
-    http://www.github.com/vermiculus/resume-cv
-                  \iow_newline:
-                  \iow_newline:
-                  \iow_newline:
+  \iow_new:N \g_resume_output_text_iow
+  \iow_open:Nn \g_resume_output_text_iow { \l_resume_output_text_tl }
+
+  \ior_new:N \g_resume_output_text_preamble_ior
+  \ior_open:Nn \g_resume_output_text_preamble_ior { \l_resume_output_text_preamble_tl }
+
+  \ior_str_map_inline:Nn \g_resume_output_text_preamble_ior
+    { \iow_now:Nn \g_resume_output_text_iow { #1 }
   }
 }
 
 \cs_new:Nn \resume_maybe_write:n {
   \tl_if_empty:NF \l_resume_output_text_tl {
-    \iow_now:Nx \l_resume_output_text_iow { #1 }
+    \iow_shipout:Nx \g_resume_output_text_iow { #1 }
   }
 }
 

@@ -6,8 +6,26 @@
 {1.0}
 {A class for my resume/CV}
 
+\keys_define:nn { resume / options } {
+  textout .tl_set:N = \l_resume_output_text_tl
+}
+
+\ProcessKeysOptions{ resume / options }
+
 \LoadClass{article}
 \RequirePackage{fontspec}
+\RequirePackage{hyperref}
+
+\tl_if_empty:NF \l_resume_output_text_tl {
+  \iow_new:N \l_resume_output_text_iow
+  \iow_open:Nn \l_resume_output_text_iow { \l_resume_output_text_tl }
+}
+
+\cs_new:Nn \resume_maybe_write:n {
+  \tl_if_empty:NF \l_resume_output_text_tl {
+    \iow_now:Nx \l_resume_output_text_iow { #1 }
+  }
+}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Logical Declarations and Markup %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -25,17 +43,30 @@
 
 %% Address %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \keys_define:nn { resume/contact } {
-  street   .tl_set:N = \l_resume_contact_street_tl,
-  city     .tl_set:N = \l_resume_contact_city_tl,
-  state    .tl_set:N = \l_resume_contact_state_tl,
-  zip      .tl_set:N = \l_resume_contact_zip_tl,
-  name     .tl_set:N = \l_resume_contact_name_tl,
-  phone    .tl_set:N = \l_resume_contact_phone_tl,
+  street   .tl_set:N  = \l_resume_contact_street_tl,
+  city     .tl_set:N  = \l_resume_contact_city_tl,
+  state    .tl_set:N  = \l_resume_contact_state_tl,
+  zip      .tl_set:N  = \l_resume_contact_zip_tl,
+  name     .tl_set:N  = \l_resume_contact_name_tl,
+  phone    .tl_set:N  = \l_resume_contact_phone_tl,
+  email    .tl_set:N  = \l_resume_contact_email_tl,
 }
 
 \NewDocumentCommand \ContactInformation { m }
 {
   \keys_set:nn { resume / contact } { #1 }
+
+  \resume_maybe_write:n
+  {
+    \exp_not:V \l_resume_contact_name_tl \iow_newline:
+    \exp_not:V \l_resume_contact_email_tl \iow_newline:
+    \exp_not:V \l_resume_contact_phone_tl \iow_newline:
+    \iow_newline: 
+    \exp_not:V \l_resume_contact_street_tl \iow_newline:
+    \exp_not:V \l_resume_contact_city_tl ,\c_space_tl
+    \exp_not:V \l_resume_contact_state_tl \iow_newline:
+    \exp_not:V \l_resume_contact_zip_tl \iow_newline:
+  }
 }
 
 % ensure that we don't have a HoeflerText situation again (as opposed
@@ -62,8 +93,10 @@
       \l_resume_contact_street_tl\\
 
       \l_resume_contact_city_tl,~
-      \l_resume_contact_state_tl,~
-      \l_resume_contact_zip_tl\\
+      \l_resume_contact_state_tl
+      \tl_if_empty:NF \l_resume_contact_zip_tl
+        { ,~  \l_resume_contact_zip_tl }
+        \\
 
       \l_resume_contact_phone_tl
     \end{flushright}
@@ -78,6 +111,8 @@
   company .tl_set:N = \l_resume_position_company_tl,
   state   .tl_set:N = \l_resume_position_state_tl,
   city    .tl_set:N = \l_resume_position_city_tl,
+  titlelink .tl_set:N = \l_resume_position_titlelink_tl,
+  companylink .tl_set:N = \l_resume_position_companylink_tl,
 }
 
 \NewDocumentEnvironment { position } { m }
@@ -90,19 +125,28 @@
   \group_begin:
   \keys_set:nn { resume / position } { #1 }
   \begin{tabular*}{\textwidth}{@{}l@{\extracolsep{\fill}}r@{}}
+    \tl_if_empty:NF \l_resume_position_titlelink_tl {\href{\l_resume_position_titlelink_tl}}
     {\itshape \l_resume_position_title_tl}
     &
+    \tl_if_empty:NF \l_resume_position_companylink_tl {\href{\l_resume_position_companylink_tl}}
     {\l_resume_position_company_tl} \\[0.5ex]
     
     {\l_resume_position_date_tl}
     &
     {\l_resume_position_city_tl}, ~ {\l_resume_position_state_tl}
   \end{tabular*}
-  \group_end:
 
   \hspace{-\textwidth}
   \hspace{-4em}
   \raisebox{.25ex}{\textreferencemark}
+
+  \resume_maybe_write:n {
+    Position:\c_space_tl \exp_not:V \l_resume_position_title_tl   \iow_newline: 
+    Company:\c_space_tl  \exp_not:V \l_resume_position_company_tl \iow_newline:
+    Date:\c_space_tl     \exp_not:V \l_resume_position_date_tl    \iow_newline:
+    Location:\c_space_tl \exp_not:V \l_resume_position_city_tl, \c_space_tl \l_resume_position_state_tl \iow_newline:
+  }
+  \group_end:
 }
 {
   \endminipage
@@ -126,15 +170,6 @@
   % \vfill
 }
 \AtEndDocument{\vspace{0cm plus 1filll}}
-
-\ContactInformation{
-  street = It ~ would ~ be ~ a ~ good ~ idea ~ to ~ put ~ your ~ street ~ here.,
-  city   = It ~ would ~ be ~ a ~ good ~ idea ~ to ~ put ~ your ~ city ~ here.,
-  state  = It ~ would ~ be ~ a ~ good ~ idea ~ to ~ put ~ your ~ state ~ here.,
-  zip    = It ~ would ~ be ~ a ~ good ~ idea ~ to ~ put ~ your ~ zip ~ here.,
-  name   = It ~ would ~ be ~ a ~ good ~ idea ~ to ~ put ~ your ~ name ~ here.,
-  phone  = It ~ would ~ be ~ a ~ good ~ idea ~ to ~ put ~ your ~ phone ~ here.,
-}
 
 \def\Dash{\unskip\thinspace\textemdash\thinspace\ignorespaces}
 

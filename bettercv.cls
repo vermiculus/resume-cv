@@ -16,6 +16,8 @@
 \LoadClass{article}
 \RequirePackage{fontspec}
 \RequirePackage{hyperref}
+\RequirePackage{marvosym}
+
 
 \tl_if_empty:NF \l_resume_output_text_tl {
   \iow_new:N \g_resume_output_text_iow
@@ -66,6 +68,7 @@
   name     .tl_set:N  = \l_resume_contact_name_tl,
   phone    .tl_set:N  = \l_resume_contact_phone_tl,
   email    .tl_set:N  = \l_resume_contact_email_tl,
+  url      .tl_set:N  = \l_resume_contact_url_tl,
 }
 
 \NewDocumentCommand \ContactInformation { m }
@@ -99,22 +102,17 @@
   \noindent
   \begin{minipage}{.6\linewidth}
     \tl_if_empty:NF \l_resume_name_font_tl
-                    { \fontspec[Path=fonts/]{\tl_use:N \l_resume_name_font_tl} }
+      { \fontspec[Path=fonts/]{\tl_use:N \l_resume_name_font_tl} }
     \Huge \hspace{-1em}
     \l_resume_contact_name_tl
   \end{minipage}
   \hfill
   \begin{minipage}{.4\linewidth}
     \begin{flushright}
-      \l_resume_contact_street_tl\\
-
-      \l_resume_contact_city_tl,~
-      \l_resume_contact_state_tl
-      \tl_if_empty:NF \l_resume_contact_zip_tl
-        { ,~  \l_resume_contact_zip_tl }
-        \\
-
-      \l_resume_contact_phone_tl
+      \l_resume_contact_phone_tl \\
+      \ttfamily
+      \l_resume_contact_email_tl \\
+      \tl_if_empty:NF \l_resume_contact_url_tl { \l_resume_contact_url_tl \\ }
     \end{flushright}
   \end{minipage}
 }
@@ -213,21 +211,8 @@
 
 \AtBeginDocument{
   \maketitle
-  % \vspace{2ex}\hspace*{.4\textwidth}\begin{minipage}{\textwidth}
-  %   \usetikzlibrary{lindenmayersystems}
-  %   \usetikzlibrary[shadings]
-  %   \pgfdeclarelindenmayersystem{Fractal plant}{
-  %   \rule{X -> F-[[X]+X]+F[+FX]-X}
-  %   \rule{F -> FF}}
-  %   \begin{tikzpicture}
-  %     \draw [black!80!green, rotate=180, xscale=-1]
-  %     [l-system={Fractal plant, axiom=X, order=6, step=2pt, angle=25}]
-  %     lindenmayer system; 
-  %   \end{tikzpicture}
-  % \end{minipage}\vspace*{-48ex}
-  % \vfill
 }
-\AtEndDocument{\vspace{0cm plus 1filll}}
+%\AtEndDocument{\vspace{0cm plus 1filll}}
 
 \def\Dash{\unskip\thinspace\textemdash\thinspace\ignorespaces}
 

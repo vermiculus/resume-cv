@@ -182,6 +182,7 @@
 \def\Dash{\unskip\thinspace\textemdash\thinspace\ignorespaces}
 
 \pagestyle{empty}
+\setcounter{secnumdepth}{0}
 % Local Variables:
 % TeX-PDF-mode: t
 % TeX-master: "cv.tex"

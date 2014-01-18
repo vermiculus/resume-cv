@@ -41,12 +41,20 @@
 \RequirePackage{xparse}
 
 %% Date Range %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\DeclareDocumentCommand \daterange { s m m o }
+\NewDocumentCommand \daterange { s m m o }
 {
   \IfBooleanTF{#1}
     {#2\thinspace\textendash\thinspace(#3)}
     {#2\thinspace\textendash\thinspace#3}
   \IfValueT { #4 } { \nobreakspace [#4] }
+}
+
+\NewDocumentCommand \Embrace { s m } { % punpunpunpunpun
+  \IfBooleanTF{#1}{\phantom{\raisebox{-.1ex}{\texttt{\{}}}}
+                  {         \raisebox{-.1ex}{\texttt{\{}}}
+  #2
+  \IfBooleanTF{#1}{\phantom{\raisebox{-.1ex}{\texttt{\}}}}}
+                  {         \raisebox{-.1ex}{\texttt{\}}}}
 }
 
 %% Address %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -114,13 +122,14 @@
 %% Position %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \keys_define:nn { resume / position }
 {
-  title   .tl_set:N = \l_resume_position_title_tl,
-  date    .tl_set:N = \l_resume_position_date_tl,
-  company .tl_set:N = \l_resume_position_company_tl,
-  state   .tl_set:N = \l_resume_position_state_tl,
-  city    .tl_set:N = \l_resume_position_city_tl,
-  titlelink .tl_set:N = \l_resume_position_titlelink_tl,
-  companylink .tl_set:N = \l_resume_position_companylink_tl,
+  title       .tl_set:N   = \l_resume_position_title_tl,
+  date        .tl_set:N   = \l_resume_position_date_tl,
+  company     .tl_set:N   = \l_resume_position_company_tl,
+  state       .tl_set:N   = \l_resume_position_state_tl,
+  city        .tl_set:N   = \l_resume_position_city_tl,
+  titlelink   .tl_set:N   = \l_resume_position_titlelink_tl,
+  companylink .tl_set:N   = \l_resume_position_companylink_tl,
+  technical   .bool_set:N = \l_resume_position_technical_bool,
 }
 
 \NewDocumentEnvironment { position } { m }
@@ -133,10 +142,12 @@
   \group_begin:
   \keys_set:nn { resume / position } { #1 }
   \begin{tabular*}{\textwidth}{@{}l@{\extracolsep{\fill}}r@{}}
-    \tl_if_empty:NF \l_resume_position_titlelink_tl {\href{\l_resume_position_titlelink_tl}}
+    \tl_if_empty:NF \l_resume_position_titlelink_tl
+                    { \href{\l_resume_position_titlelink_tl} }
     {\itshape \l_resume_position_title_tl}
     &
-    \tl_if_empty:NF \l_resume_position_companylink_tl {\href{\l_resume_position_companylink_tl}}
+    \tl_if_empty:NF \l_resume_position_companylink_tl
+                    { \href{\l_resume_position_companylink_tl} }
     {\l_resume_position_company_tl} \\[0.5ex]
     
     {\l_resume_position_date_tl}
@@ -146,7 +157,10 @@
 
   \hspace{-\textwidth}
   \hspace{-4em}
-  \raisebox{.25ex}{\textreferencemark}
+  \raisebox{.25ex}{
+    \bool_if:NTF \l_resume_position_technical_bool {\Embrace}{\Embrace*}
+    \textreferencemark
+  }
 
   \resume_maybe_write:n {
     Position:\c_space_tl \exp_not:V \l_resume_position_title_tl   \iow_newline: 
@@ -159,6 +173,42 @@
 {
   \endminipage
   \vspace{4ex plus 1ex minus 1ex}
+}
+
+\keys_define:nn { resume / project } {
+  ghkey       .tl_set:N   = \l_resume_project_ghkey_tl,
+  title       .tl_set:N   = \l_resume_project_title_tl,
+  description .tl_set:N   = \l_resume_project_description_tl,
+  date        .tl_set:N   = \l_resume_project_date_tl,
+  technology  .tl_set:N   = \l_resume_project_technology_tl,
+  technical   .bool_set:N = \l_resume_project_technical_bool,
+}
+\NewDocumentCommand \project { m } {
+  \vspace{2ex plus .2ex minus .2ex}
+  \par\noindent
+  \group_begin:
+  \keys_set:nn { resume / project } { #1 }
+  \begin{tabular*}{\textwidth}{@{}l@{\extracolsep{\fill}}r@{}}
+    \tl_if_empty:NF \l_resume_project_ghkey_tl
+      { \href{http://www.github.com/
+              \l_resume_project_ghkey_tl}
+      }
+    {\l_resume_project_title_tl}
+    \tl_if_empty:NF \l_resume_project_ghkey_tl
+      { \qquad \texttt{vermiculus/\l_resume_project_ghkey_tl} }
+    &
+    {\l_resume_project_technology_tl} \\[0.5ex]
+    {\l_resume_project_description_tl}
+    &
+    {\l_resume_project_date_tl}
+  \end{tabular*}
+  \hspace{-\textwidth}
+  \hspace{-4em}
+  \raisebox{.25ex}{
+    \bool_if:NTF \l_resume_project_technical_bool {\Embrace}{\Embrace*}
+    \textreferencemark
+  }
+  \group_end:
 }
 
 \AtBeginDocument{

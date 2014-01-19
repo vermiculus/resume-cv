@@ -25,7 +25,8 @@
 {}
 {}
 [\titlerule]
-\titleformat*\subsection{\normalsize\bfseries}
+\titleformat*{\subsection}
+{\normalsize\bfseries}
 
 \tl_if_empty:NF \g_resume_options_output_text_file_tl {
   \iow_new:N \g_resume_output_text_iow

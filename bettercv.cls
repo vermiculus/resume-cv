@@ -9,6 +9,7 @@
 \keys_define:nn { resume / options } {
   textout .tl_set:N = \l_resume_output_text_tl,
   textout preamble .tl_set:N = \l_resume_output_text_preamble_tl
+  mark             .bool_set:N = \g_resume_options_do_mark_bool,
 }
 
 \ProcessKeysOptions{ resume / options }
@@ -59,11 +60,11 @@
 }
 
 \NewDocumentCommand \Embrace { s O{-0.1ex} m } { % punpunpunpunpun
-%  \IfBooleanTF{#1}{\phantom{\raisebox{#2}{\texttt{\{}}}}
-%                  {         \raisebox{#2}{\texttt{\{}}}
+  \IfBooleanTF{#1}{\phantom{\raisebox{#2}{\texttt{\{}}}}
+                  {         \raisebox{#2}{\texttt{\{}}}
   #3
-%  \IfBooleanTF{#1}{\phantom{\raisebox{#2}{\texttt{\}}}}}
-%                  {         \raisebox{#2}{\texttt{\}}}}
+  \IfBooleanTF{#1}{\phantom{\raisebox{#2}{\texttt{\}}}}}
+                  {         \raisebox{#2}{\texttt{\}}}}
 }
 
 %% Address %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -160,11 +161,14 @@
     {\l_resume_position_city_tl}, ~ {\l_resume_position_state_tl}
   \end{tabular*}
 
-  \hspace{-\textwidth}
-  \hspace{-4em}
-  \raisebox{.25ex}{
-    \bool_if:NTF \l_resume_position_technical_bool {\Embrace}{\Embrace*}
-    %\textreferencemark
+  \bool_if:NT \g_resume_options_do_mark_bool
+  {
+    \hspace{-\textwidth}
+    \hspace{-4em}
+    \raisebox{.25ex}{
+      \bool_if:NTF \l_resume_position_technical_bool {\Embrace}{\Embrace*}
+      \textreferencemark
+    }
   }
 
   \resume_maybe_write:n {
@@ -206,11 +210,15 @@
     &
     {\l_resume_project_date_tl}
   \end{tabular*}
-  \hspace{-\textwidth}
-  \hspace{-4em}
-  \raisebox{.25ex}{
-    \bool_if:NTF \l_resume_project_technical_bool {\Embrace}{\Embrace*}
-    %\textreferencemark
+
+  \bool_if:NT \g_resume_options_do_mark_bool
+  {
+    \hspace{-\textwidth}
+    \hspace{-4em}
+    \raisebox{.25ex}{
+      \bool_if:NTF \l_resume_project_technical_bool {\Embrace}{\Embrace*}
+      \textreferencemark
+    }
   }
   \group_end:
 }

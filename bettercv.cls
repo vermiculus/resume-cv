@@ -7,8 +7,8 @@
 {A class for my resume/CV}
 
 \keys_define:nn { resume / options } {
-  textout .tl_set:N = \l_resume_output_text_tl,
-  textout preamble .tl_set:N = \l_resume_output_text_preamble_tl
+  textout          .tl_set:N   = \g_resume_options_output_text_file_tl,
+  textout preamble .tl_set:N   = \g_resume_options_output_text_preamble_tl,
   mark             .bool_set:N = \g_resume_options_do_mark_bool,
 }
 
@@ -27,12 +27,12 @@
 [\titlerule]
 \titleformat*\subsection{\normalsize\bfseries}
 
-\tl_if_empty:NF \l_resume_output_text_tl {
+\tl_if_empty:NF \g_resume_options_output_text_file_tl {
   \iow_new:N \g_resume_output_text_iow
-  \iow_open:Nn \g_resume_output_text_iow { \l_resume_output_text_tl }
+  \iow_open:Nn \g_resume_output_text_iow { \g_resume_options_output_text_file_tl }
 
   \ior_new:N \g_resume_output_text_preamble_ior
-  \ior_open:Nn \g_resume_output_text_preamble_ior { \l_resume_output_text_preamble_tl }
+  \ior_open:Nn \g_resume_output_text_preamble_ior { \g_resume_options_output_text_preamble_tl }
 
   \ior_str_map_inline:Nn \g_resume_output_text_preamble_ior
     { \iow_now:Nn \g_resume_output_text_iow { #1 }
@@ -40,7 +40,7 @@
 }
 
 \cs_new:Nn \resume_maybe_write:n {
-  \tl_if_empty:NF \l_resume_output_text_tl {
+  \tl_if_empty:NF \g_resume_options_output_text_file_tl {
     \iow_shipout:Nx \g_resume_output_text_iow { #1 }
   }
 }

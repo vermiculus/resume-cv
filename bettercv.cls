@@ -118,9 +118,8 @@
   \begin{minipage}{.4\linewidth}
     \begin{flushright}
       \l_resume_contact_phone_tl \\
-      \ttfamily
-      \l_resume_contact_email_tl \\
-      \tl_if_empty:NF \l_resume_contact_url_tl { \l_resume_contact_url_tl \\ }
+      \href{mailto:\l_resume_contact_email_tl}{\ttfamily \l_resume_contact_email_tl} \\
+      \tl_if_empty:NF \l_resume_contact_url_tl { \url{\l_resume_contact_url_tl} \\ }
     \end{flushright}
   \end{minipage}
 }
@@ -141,7 +140,6 @@
 \NewDocumentEnvironment { position } { m }
 {
   \par\noindent
-%  \vfill
   \minipage{\textwidth}
   \par\vspace{2ex}\noindent
 

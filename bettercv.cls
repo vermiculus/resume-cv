@@ -51,12 +51,12 @@
   \IfValueT { #4 } { \nobreakspace [#4] }
 }
 
-\NewDocumentCommand \Embrace { s m } { % punpunpunpunpun
-  \IfBooleanTF{#1}{\phantom{\raisebox{-.1ex}{\texttt{\{}}}}
-                  {         \raisebox{-.1ex}{\texttt{\{}}}
-  #2
-  \IfBooleanTF{#1}{\phantom{\raisebox{-.1ex}{\texttt{\}}}}}
-                  {         \raisebox{-.1ex}{\texttt{\}}}}
+\NewDocumentCommand \Embrace { s O{-0.1ex} m } { % punpunpunpunpun
+%  \IfBooleanTF{#1}{\phantom{\raisebox{#2}{\texttt{\{}}}}
+%                  {         \raisebox{#2}{\texttt{\{}}}
+  #3
+%  \IfBooleanTF{#1}{\phantom{\raisebox{#2}{\texttt{\}}}}}
+%                  {         \raisebox{#2}{\texttt{\}}}}
 }
 
 %% Address %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -157,7 +157,7 @@
   \hspace{-4em}
   \raisebox{.25ex}{
     \bool_if:NTF \l_resume_position_technical_bool {\Embrace}{\Embrace*}
-    \textreferencemark
+    %\textreferencemark
   }
 
   \resume_maybe_write:n {
@@ -204,7 +204,7 @@
   \hspace{-4em}
   \raisebox{.25ex}{
     \bool_if:NTF \l_resume_project_technical_bool {\Embrace}{\Embrace*}
-    \textreferencemark
+    %\textreferencemark
   }
   \group_end:
 }

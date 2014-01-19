@@ -1,7 +1,7 @@
 \usepackage{microtype}
 \usepackage{xspace}
 \usepackage[margin=1.2in]{geometry}
-\usepackage{todo}
+\usepackage[hide]{todo}
 \usepackage{xcolor}
 
 \hypersetup{
@@ -15,11 +15,11 @@
 \fancyfoot{}
 \renewcommand \headrulewidth {0pt}
 \renewcommand \footrulewidth {0pt}
-\cfoot{\textcolor{gray}{This document was last updated on \today}}
+\cfoot{\textcolor{gray}{\footnotesize This document was last updated on \today.}}
 
 \usepackage[inline]{enumitem}
-\setlist[itemize]{itemsep=1pt,topsep=1pt}
-\setlist[description]{itemsep=1pt,topsep=1pt}
+\setlist[itemize]{itemsep=1pt}
+\setlist[description]{itemsep=1pt}
 
 
 \newcommand \course[1]   {\textit{#1}}
@@ -29,3 +29,8 @@
 \newcommand \CPP        {{C\nolinebreak[4]\hspace{-.05em}\raisebox{.4ex}{\tiny\bf ++}}}
 \newcommand \CSharp     {{C\#}}
 \newcommand \Lisp       {{\textsc{Lisp}}}
+
+% Local Variables:
+% TeX-PDF-mode: t
+% TeX-master: "cv.tex"
+% End:

@@ -182,6 +182,7 @@
 
 \keys_define:nn { resume / project } {
   ghkey       .tl_set:N   = \l_resume_project_ghkey_tl,
+  link        .tl_set:N   = \l_resume_project_link_tl,
   title       .tl_set:N   = \l_resume_project_title_tl,
   description .tl_set:N   = \l_resume_project_description_tl,
   date        .tl_set:N   = \l_resume_project_date_tl,
@@ -195,12 +196,10 @@
   \keys_set:nn { resume / project } { #1 }
   \begin{tabular*}{\textwidth}{@{}l@{\extracolsep{\fill}}r@{}}
     \tl_if_empty:NF \l_resume_project_ghkey_tl
-      { \href{http://www.github.com/
-              \l_resume_project_ghkey_tl}
-      }
-    {\l_resume_project_title_tl}
+      { \href{\l_resume_project_link_tl} }
+    { \parbox{3cm}{\l_resume_project_title_tl} }
     \tl_if_empty:NF \l_resume_project_ghkey_tl
-      { \qquad \texttt{vermiculus/\l_resume_project_ghkey_tl} }
+      { \qquad \texttt{\l_resume_project_ghkey_tl} }
     &
     {\l_resume_project_technology_tl} \\[0.5ex]
     {\l_resume_project_description_tl}

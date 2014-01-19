@@ -17,7 +17,14 @@
 \RequirePackage{fontspec}
 \RequirePackage{hyperref}
 \RequirePackage{marvosym}
-
+\RequirePackage{titlesec}
+\titleformat{\section}
+{\Large\scshape}
+{}
+{}
+{}
+[\titlerule]
+\titleformat*\subsection{\normalsize\bfseries}
 
 \tl_if_empty:NF \l_resume_output_text_tl {
   \iow_new:N \g_resume_output_text_iow

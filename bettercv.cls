@@ -1,20 +1,41 @@
 \NeedsTeXFormat{LaTeX2e}[1994/06/01]
-\RequirePackage{expl3,l3keys2e}
+\RequirePackage{expl3,xparse}
 \ProvidesExplClass
 {bettercv}
 {2013/12/23}
 {1.0}
 {A class for my resume/CV}
+\DeclareOption*{\PassOptionToClass{\CurrentOption}{article}}
+\ProcessOptions*
+\LoadClass{article}
 
 \keys_define:nn { resume / options } {
-  textout          .tl_set:N   = \g_resume_options_output_text_file_tl,
-  textout preamble .tl_set:N   = \g_resume_options_output_text_preamble_tl,
-  mark             .bool_set:N = \g_resume_options_do_mark_bool,
+  textout             .tl_gset:N   = \g_resume_options_output_text_file_tl,
+  textout~preamble    .tl_gset:N   = \g_resume_options_output_text_preamble_tl,
+  mark                .bool_gset:N = \g_resume_options_do_mark_bool,
 }
 
-\ProcessKeysOptions{ resume / options }
+\NewDocumentCommand \BetterSetup { m } {
+  \keys_set:nn { resume / options } { #1 }
+  \bool_if:nT {
+    \g_resume_options_timeline__do_position_bool ||
+    \g_resume_options_timeline__do_project_bool }
+      { \RequirePackage{tikz} }
 
-\LoadClass{article}
+  \tl_if_empty:NF \g_resume_options_output_text_file_tl {
+    \iow_new:N \g_resume_output_text_iow
+    \iow_open:Nn \g_resume_output_text_iow { \g_resume_options_output_text_file_tl }
+
+    \ior_new:N \g_resume_output_text_preamble_ior
+    \ior_open:Nn \g_resume_output_text_preamble_ior { \g_resume_options_output_text_preamble_tl }
+
+    \ior_str_map_inline:Nn \g_resume_output_text_preamble_ior
+      { \iow_now:Nn \g_resume_output_text_iow { #1 }
+    }
+  }
+}
+
+
 \RequirePackage{fontspec}
 \RequirePackage{hyperref}
 \RequirePackage{marvosym}
@@ -28,30 +49,12 @@
 \titleformat*{\subsection}
 {\normalsize\bfseries}
 
-\tl_if_empty:NF \g_resume_options_output_text_file_tl {
-  \iow_new:N \g_resume_output_text_iow
-  \iow_open:Nn \g_resume_output_text_iow { \g_resume_options_output_text_file_tl }
-
-  \ior_new:N \g_resume_output_text_preamble_ior
-  \ior_open:Nn \g_resume_output_text_preamble_ior { \g_resume_options_output_text_preamble_tl }
-
-  \ior_str_map_inline:Nn \g_resume_output_text_preamble_ior
-    { \iow_now:Nn \g_resume_output_text_iow { #1 }
-  }
-}
-
 \cs_new:Nn \resume_maybe_write:n {
   \tl_if_empty:NF \g_resume_options_output_text_file_tl {
     \iow_shipout:Nx \g_resume_output_text_iow { #1 }
   }
 }
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% Logical Declarations and Markup %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\RequirePackage{xparse}
-
-%% Date Range %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \NewDocumentCommand \daterange { s m m o }
 {
   \IfBooleanTF{#1}
@@ -68,7 +71,6 @@
                   {         \raisebox{#2}{\texttt{\}}}}
 }
 
-%% Address %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \keys_define:nn { resume/contact } {
   street   .tl_set:N  = \l_resume_contact_street_tl,
   city     .tl_set:N  = \l_resume_contact_city_tl,
@@ -125,7 +127,6 @@
   \end{minipage}
 }
 
-%% Position %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \keys_define:nn { resume / position }
 {
   title       .tl_set:N   = \l_resume_position_title_tl,
@@ -141,10 +142,10 @@
 \NewDocumentEnvironment { position } { m }
 {
   \par\noindent
+  \group_begin:
   \minipage{\textwidth}
   \par\vspace{2ex}\noindent
 
-  \group_begin:
   \keys_set:nn { resume / position } { #1 }
   \begin{tabular*}{\textwidth}{@{}l@{\extracolsep{\fill}}r@{}}
     \tl_if_empty:NF \l_resume_position_titlelink_tl
@@ -176,10 +177,10 @@
     Date:\c_space_tl     \exp_not:V \l_resume_position_date_tl    \iow_newline:
     Location:\c_space_tl \exp_not:V \l_resume_position_city_tl, \c_space_tl \l_resume_position_state_tl \iow_newline:
   }
-  \group_end:
 }
 {
   \endminipage
+  \group_end:
   \vspace{4ex plus 1ex minus 1ex}
 }
 
@@ -221,11 +222,6 @@
   }
   \group_end:
 }
-
-\AtBeginDocument{
-  \maketitle
-}
-%\AtEndDocument{\vspace{0cm plus 1filll}}
 
 \def\Dash{\unskip\thinspace\textemdash\thinspace\ignorespaces}
 

@@ -1,12 +1,15 @@
-\documentclass[
-textout=\jobname.cv.txt,
-textout preamble = preamble.txt,
-]{bettercv}
+\documentclass{bettercv}
+\BetterSetup{
+  textout = \jobname.cv.txt,
+  textout preamble = preamble.txt,
+}
+
 \usepackage{additional-setup}
 
 \input{contact-info}
 
 \begin{document}
+\maketitle
 \section{Technical Summary}
 
 \begin{description}

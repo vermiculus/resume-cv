@@ -37,6 +37,11 @@
   \resume_make_as_acronym:n { #1 }
 }
 
+\NewDocumentCommand \SetLeftIndent { m } {
+  \setlength\g_resume_typeset_position_style_cramped__left_skip{#1}
+  \setlength\g_resume_typeset_education_style_cramped__left_skip{#1}
+}
+
 \def\Dash{\unskip\thinspace\textemdash\thinspace\ignorespaces\-}
 
 %%% Local Variables: 

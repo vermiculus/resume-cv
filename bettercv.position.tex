@@ -12,7 +12,9 @@
 }
 
 \bool_new:N \g_resume_position_first_listed_bool
-\NewDocumentCommand \DeclareFirstPosition { } { \bool_gset_true:N \g_resume_position_first_listed_bool }
+\NewDocumentCommand \DeclareFirstPosition { }
+{ \bool_gset_true:N \g_resume_position_first_listed_bool }
+
 \DeclareFirstPosition
 
 \cs_new:Nn \resume_typeset_position__style_spaced_end: {
@@ -50,9 +52,12 @@
   }
 }
 
+\newlength\g_resume_typeset_position_style_cramped__left_skip
+\setlength\g_resume_typeset_position_style_cramped__left_skip{0cm}
+
 \cs_new:Nn \resume_typeset_position__style_cramped_begin: {
-  \hspace*{-1.5cm}
   \minipage{.2\textwidth}
+  \hspace*{-\g_resume_typeset_position_style_cramped__left_skip}
   \sffamily
   \small
   \raggedleft
@@ -70,13 +75,17 @@
   \l_resume_position_state_tl
   \endminipage
   \hfill
-  \minipage{.85\textwidth}
+  \minipage[t]{
+    \dimexpr
+    .75\textwidth
+    +
+    \g_resume_typeset_position_style_cramped__left_skip
+    \relax
+  }
 }
 
 \cs_new:Nn \resume_typeset_position__style_cramped_end: {
-  \vspace*{-2ex}
   \endminipage
-  \vspace{1ex plus .1ex minus .1ex}
 }
 
 \NewDocumentEnvironment { position } { m O{cramped} }

@@ -56,8 +56,11 @@
   \l_resume_education_major_gpa_tl
 }
 
+\newlength\g_resume_typeset_education_style_cramped__left_skip
+\setlength\g_resume_typeset_education_style_cramped__left_skip{0cm}
+
 \cs_new:Nn \resume_typeset_education__style_cramped_begin: {
-  \hspace*{-1.5cm}
+  \hspace*{-\g_resume_typeset_position_style_cramped__left_skip}
   \minipage{.2\textwidth}
   \sffamily
   \small
@@ -81,7 +84,13 @@
   \l_resume_education_state_tl
   \endminipage
   \hfill
-  \minipage{.85\textwidth}
+  \minipage{
+    \dimexpr
+    .75\textwidth
+    +
+    \g_resume_typeset_position_style_cramped__left_skip
+    \relax
+  }
 }
 
 \cs_new:Nn \resume_typeset_education__style_cramped_end: {

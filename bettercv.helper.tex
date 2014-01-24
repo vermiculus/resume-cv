@@ -1,6 +1,6 @@
 \cs_new:Nn \resume_maybe_write:n {
   \tl_if_empty:NF \g_resume_options_output_text_file_tl {
-    \iow_shipout:Nx \g_resume_output_text_iow { #1 }
+    \iow_now:Nx \g_resume_output_text_iow { #1 }
   }
 }
 

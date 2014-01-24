@@ -55,9 +55,13 @@
 \newlength\g_resume_typeset_position_style_cramped__left_skip
 \setlength\g_resume_typeset_position_style_cramped__left_skip{0cm}
 
+\newif\ifhrule
+\hrulefalse
+
 \cs_new:Nn \resume_typeset_position__style_cramped_begin: {
-  \minipage{.2\textwidth}
   \hspace*{-\g_resume_typeset_position_style_cramped__left_skip}
+  \minipage[t]{.2\textwidth}
+  \ifhrule\hrule\fi
   \sffamily
   \small
   \raggedleft
@@ -73,6 +77,7 @@
   \\
   \l_resume_position_city_tl,~
   \l_resume_position_state_tl
+  \ifhrule\hrule\fi
   \endminipage
   \hfill
   \minipage[t]{
@@ -82,9 +87,11 @@
     \g_resume_typeset_position_style_cramped__left_skip
     \relax
   }
+  \ifhrule\hrule\fi
 }
 
 \cs_new:Nn \resume_typeset_position__style_cramped_end: {
+  \ifhrule\hrule\fi
   \endminipage
 }
 

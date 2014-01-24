@@ -32,7 +32,6 @@
 }
 
 
-\RequirePackage{fontspec}
 \RequirePackage{hyperref}
 \RequirePackage{marvosym}
 
@@ -92,6 +91,7 @@
 \NewDocumentCommand \SetNameFont { m }
 {
   \tl_set:Nn \l_resume_name_font_tl { #1 }
+  \RequirePackage{fontspec}
 }
 
 % yes, i do mean \maketitle.  Whoever heard of a two-column resume?

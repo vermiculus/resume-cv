@@ -1,0 +1,126 @@
+\keys_define:nn { resume / position }
+{
+  title       .tl_set:N   = \l_resume_position_title_tl,
+  date        .tl_set:N   = \l_resume_position_date_tl,
+  company     .tl_set:N   = \l_resume_position_company_tl,
+  state       .tl_set:N   = \l_resume_position_state_tl,
+  city        .tl_set:N   = \l_resume_position_city_tl,
+  titlelink   .tl_set:N   = \l_resume_position_titlelink_tl,
+  companylink .tl_set:N   = \l_resume_position_companylink_tl,
+  technical   .bool_set:N = \l_resume_position_technical_bool,
+  print       .bool_set:N = \l_resume_position_print_bool,
+}
+
+\bool_new:N \g_resume_position_first_listed_bool
+\NewDocumentCommand \DeclareFirstPosition { } { \bool_gset_true:N \g_resume_position_first_listed_bool }
+\DeclareFirstPosition
+
+\cs_new:Nn \resume_typeset_position__style_spaced_end: {
+  \vspace{4ex plus 1ex minus 1ex}
+}
+
+\cs_new:Nn \resume_typeset_position__style_spaced_begin: {
+  \par\vspace{2ex}\noindent
+
+  \begin{tabular*}{\textwidth}{@{}l@{\extracolsep{\fill}}r@{}}
+    {
+      \itshape
+      \resume_maybe_link:NN
+        \l_resume_position_titlelink_tl
+        \l_resume_position_title_tl
+    }
+    &
+    \resume_maybe_link:NN
+      \l_resume_position_companylink_tl
+      \l_resume_position_company_tl
+    \\[0.5ex]
+    {\l_resume_position_date_tl}
+    &
+    {\l_resume_position_city_tl}, ~ {\l_resume_position_state_tl}
+  \end{tabular*}
+
+  \bool_if:NT \g_resume_options_do_mark_bool
+  {
+    \hspace{-\textwidth}
+    \hspace{-4em}
+    \raisebox{.25ex}{
+      \bool_if:NTF \l_resume_position_technical_bool {\Embrace}{\Embrace*}
+      \textreferencemark
+    }
+  }
+}
+
+\cs_new:Nn \resume_typeset_position__style_cramped_begin: {
+  \hspace*{-1.5cm}
+  \minipage{.2\textwidth}
+  \sffamily
+  \small
+  \raggedleft
+  \resume_maybe_link:NN
+    \l_resume_position_titlelink_tl
+    \l_resume_position_title_tl
+  \\
+  \l_resume_position_date_tl
+  \\
+  \resume_maybe_link:NN
+    \l_resume_position_companylink_tl
+    \l_resume_position_company_tl
+  \\
+  \l_resume_position_city_tl,~
+  \l_resume_position_state_tl
+  \endminipage
+  \hfill
+  \minipage{.85\textwidth}
+}
+
+\cs_new:Nn \resume_typeset_position__style_cramped_end: {
+  \vspace*{-2ex}
+  \endminipage
+  \vspace{1ex plus .1ex minus .1ex}
+}
+
+\NewDocumentEnvironment { position } { m O{cramped} }
+{
+  \keys_set:nn { resume / position } { print=true }
+  \keys_set:nn { resume / position } { #1 }
+  \bool_if:NTF \l_resume_position_print_bool {
+    \noindent
+    \bool_if:NTF \g_resume_position_first_listed_bool
+    {
+      \bool_gset_false:N \g_resume_position_first_listed_bool
+    }
+    {
+      \vfill\noindent
+    }
+    \minipage{\textwidth}
+
+    \cs_if_exist_use:cF
+      { resume_typeset_position__style_ #2 _begin: }
+      { \typeout { NO~SUCH~STYLE~#2 } }
+
+    \resume_maybe_write:n {
+      Position: \c_space_tl \exp_not:V \l_resume_position_title_tl   \iow_newline:
+      Company:  \c_space_tl \exp_not:V \l_resume_position_company_tl \iow_newline:
+      Date:     \c_space_tl \exp_not:V \l_resume_position_date_tl    \iow_newline:
+      Location: \c_space_tl \exp_not:V \l_resume_position_city_tl,   \c_space_tl
+                            \exp_not:V \l_resume_position_state_tl   \iow_newline:
+    }
+  } {
+    \comment
+  }
+}
+{
+  \bool_if:NTF \l_resume_position_print_bool {
+    \cs_if_exist_use:cF
+      { resume_typeset_position__style_ #2 _end: }
+      { \typeout { NO~SUCH~STYLE~#2 } }
+    \endminipage
+  } {
+    \endcomment
+  }
+}
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "cv.tex"
+%%% End: 

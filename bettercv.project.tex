@@ -1,0 +1,45 @@
+\keys_define:nn { resume / project } {
+  ghkey       .tl_set:N   = \l_resume_project_ghkey_tl,
+  link        .tl_set:N   = \l_resume_project_link_tl,
+  title       .tl_set:N   = \l_resume_project_title_tl,
+  description .tl_set:N   = \l_resume_project_description_tl,
+  date        .tl_set:N   = \l_resume_project_date_tl,
+  technology  .tl_set:N   = \l_resume_project_technology_tl,
+  technical   .bool_set:N = \l_resume_project_technical_bool,
+}
+\NewDocumentCommand \project { m } {
+  \vspace{2ex plus .2ex minus .2ex}
+  \par\noindent
+  \group_begin:
+  \keys_set:nn { resume / project } { #1 }
+  \begin{tabular*}{\textwidth}{@{}l@{\extracolsep{\fill}}r@{}}
+    \parbox { 3cm } {
+      \resume_maybe_link:NN
+        \l_resume_project_link_tl
+        \l_resume_project_ghkey_tl
+    }
+    \tl_if_empty:NF \l_resume_project_ghkey_tl
+      { \qquad \texttt{\l_resume_project_ghkey_tl} }
+    &
+    {\l_resume_project_technology_tl} \\[0.5ex]
+    {\l_resume_project_description_tl}
+    &
+    {\l_resume_project_date_tl}
+  \end{tabular*}
+
+  \bool_if:NT \g_resume_options_do_mark_bool
+  {
+    \hspace{-\textwidth}
+    \hspace{-4em}
+    \raisebox{.25ex}{
+      \bool_if:NTF \l_resume_project_technical_bool {\Embrace}{\Embrace*}
+      \textreferencemark
+    }
+  }
+  \group_end:
+}
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "cv.tex"
+%%% End: 

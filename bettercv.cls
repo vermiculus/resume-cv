@@ -37,12 +37,10 @@
 \RequirePackage{marvosym}
 
 \input{bettercv.helper}
-
 \input{bettercv.header}
-
 \input{bettercv.position}
-
 \input{bettercv.project}
+\input{bettercv.edu}
 
 \pagestyle{empty}
 \setcounter{secnumdepth}{0}

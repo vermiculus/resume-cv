@@ -17,10 +17,6 @@
 
 \NewDocumentCommand \BetterSetup { m } {
   \keys_set:nn { resume / options } { #1 }
-  \bool_if:nT {
-    \g_resume_options_timeline__do_position_bool ||
-    \g_resume_options_timeline__do_project_bool }
-      { \RequirePackage{tikz} }
 
   \tl_if_empty:NF \g_resume_options_output_text_file_tl {
     \iow_new:N \g_resume_output_text_iow

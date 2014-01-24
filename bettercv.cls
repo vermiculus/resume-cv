@@ -282,7 +282,7 @@
   \group_end:
 }
 
-\def\Dash{\unskip\thinspace\textemdash\thinspace\ignorespaces}
+\def\Dash{\unskip\thinspace\textemdash\thinspace\ignorespaces\-}
 
 \pagestyle{empty}
 \setcounter{secnumdepth}{0}

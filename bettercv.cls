@@ -39,15 +39,6 @@
 \RequirePackage{fontspec}
 \RequirePackage{hyperref}
 \RequirePackage{marvosym}
-\RequirePackage{titlesec}
-\titleformat{\section}
-{\Large\scshape}
-{}
-{}
-{}
-[\titlerule]
-\titleformat*{\subsection}
-{\normalsize\bfseries}
 
 \cs_new:Nn \resume_maybe_write:n {
   \tl_if_empty:NF \g_resume_options_output_text_file_tl {

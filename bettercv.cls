@@ -79,14 +79,14 @@
 
   \resume_maybe_write:n
   {
-    \exp_not:V \l_resume_contact_name_tl \iow_newline:
-    \exp_not:V \l_resume_contact_email_tl \iow_newline:
-    \exp_not:V \l_resume_contact_phone_tl \iow_newline:
-    \iow_newline: 
+    \exp_not:V \l_resume_contact_name_tl   \iow_newline:
+    \exp_not:V \l_resume_contact_email_tl  \iow_newline:
+    \exp_not:V \l_resume_contact_phone_tl  \iow_newline:
+                                           \iow_newline:
     \exp_not:V \l_resume_contact_street_tl \iow_newline:
-    \exp_not:V \l_resume_contact_city_tl ,\c_space_tl
-    \exp_not:V \l_resume_contact_state_tl \iow_newline:
-    \exp_not:V \l_resume_contact_zip_tl \iow_newline:
+    \exp_not:V \l_resume_contact_city_tl , \c_space_tl
+    \exp_not:V \l_resume_contact_state_tl  \iow_newline:
+    \exp_not:V \l_resume_contact_zip_tl    \iow_newline:
   }
 }
 

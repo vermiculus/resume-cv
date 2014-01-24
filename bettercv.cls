@@ -282,6 +282,15 @@
   \group_end:
 }
 
+\cs_new:Nn \resume_make_as_acronym:n {
+  \seq_set_split:Nnn \l_tmpa_seq {} { #1 }
+  \seq_use:Nn \l_tmpa_seq {.\,}
+  .\unskip
+}
+\NewDocumentCommand \Acronym { m } {
+  \resume_make_as_acronym:n { #1 }
+}
+
 \def\Dash{\unskip\thinspace\textemdash\thinspace\ignorespaces\-}
 
 \pagestyle{empty}

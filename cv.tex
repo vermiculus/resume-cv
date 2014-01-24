@@ -6,7 +6,18 @@
 
 \usepackage{additional-setup}
 
-\input{contact-info}
+\ContactInformation{
+  name   = Dolan Duck,
+  email  = dolanduck@stackexchange.com,
+  url    = http://tex.stackexchange.com,
+  phone  = 123\,456\,7890,
+  street = 123 Duck Lane,
+  city   = Duckville,
+  state  = Duckota,
+  zip    = duuuuuuck,
+}
+
+\IfFileExists{./contact-info.tex}{\input{contact-info}}{}
 
 \begin{document}
 \maketitle

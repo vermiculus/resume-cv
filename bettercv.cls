@@ -33,6 +33,7 @@
 
 
 \RequirePackage{hyperref}
+\RequirePackage{verbatim}
 \RequirePackage{marvosym}
 
 \cs_new:Nn \resume_maybe_write:n {
@@ -124,25 +125,32 @@
   titlelink   .tl_set:N   = \l_resume_position_titlelink_tl,
   companylink .tl_set:N   = \l_resume_position_companylink_tl,
   technical   .bool_set:N = \l_resume_position_technical_bool,
+  print       .bool_set:N = \l_resume_position_print_bool,
 }
 
-\NewDocumentEnvironment { position } { m }
-{
-  \par\noindent
-  \group_begin:
-  \minipage{\textwidth}
+\bool_new:N \g_resume_position_first_listed_bool
+\NewDocumentCommand \DeclareFirstPosition { } { \bool_gset_true:N \g_resume_position_first_listed_bool }
+\DeclareFirstPosition
+
+\cs_new:Nn \resume_typeset_position__style_spaced_end: {
+  \vspace{4ex plus 1ex minus 1ex}
+}
+
+\cs_new:Nn \resume_typeset_position__style_spaced_begin: {
   \par\vspace{2ex}\noindent
 
-  \keys_set:nn { resume / position } { #1 }
   \begin{tabular*}{\textwidth}{@{}l@{\extracolsep{\fill}}r@{}}
-    \tl_if_empty:NF \l_resume_position_titlelink_tl
-                    { \href{\l_resume_position_titlelink_tl} }
-    {\itshape \l_resume_position_title_tl}
+    {
+      \itshape
+      \resume_maybe_link:NN
+        \l_resume_position_titlelink_tl
+        \l_resume_position_title_tl
+    }
     &
-    \tl_if_empty:NF \l_resume_position_companylink_tl
-                    { \href{\l_resume_position_companylink_tl} }
-    {\l_resume_position_company_tl} \\[0.5ex]
-    
+    \resume_maybe_link:NN
+      \l_resume_position_companylink_tl
+      \l_resume_position_company_tl
+    \\[0.5ex]
     {\l_resume_position_date_tl}
     &
     {\l_resume_position_city_tl}, ~ {\l_resume_position_state_tl}
@@ -157,18 +165,80 @@
       \textreferencemark
     }
   }
+}
 
-  \resume_maybe_write:n {
-    Position:\c_space_tl \exp_not:V \l_resume_position_title_tl   \iow_newline: 
-    Company:\c_space_tl  \exp_not:V \l_resume_position_company_tl \iow_newline:
-    Date:\c_space_tl     \exp_not:V \l_resume_position_date_tl    \iow_newline:
-    Location:\c_space_tl \exp_not:V \l_resume_position_city_tl, \c_space_tl \l_resume_position_state_tl \iow_newline:
+\cs_new:Nn \resume_maybe_link:NN {
+  \tl_if_empty:NF #1 { \href{#1} } { #2 }
+}
+
+\cs_new:Nn \resume_typeset_position__style_cramped_begin: {
+  \hspace*{-1.5cm}
+  \minipage{.2\textwidth}
+  \sffamily
+  \small
+  \raggedleft
+  \resume_maybe_link:NN
+    \l_resume_position_titlelink_tl
+    \l_resume_position_title_tl
+  \\
+  \l_resume_position_date_tl
+  \\
+  \resume_maybe_link:NN
+    \l_resume_position_companylink_tl
+    \l_resume_position_company_tl
+  \\
+  \l_resume_position_city_tl,~
+  \l_resume_position_state_tl
+  \endminipage
+  \hfill
+  \minipage{.85\textwidth}
+}
+
+\cs_new:Nn \resume_typeset_position__style_cramped_end: {
+  \vspace*{-2ex}
+  \endminipage
+  \vspace{1ex plus .1ex minus .1ex}
+}
+
+\NewDocumentEnvironment { position } { m O{cramped} }
+{
+  \keys_set:nn { resume / position } { print=true }
+  \keys_set:nn { resume / position } { #1 }
+  \bool_if:NTF \l_resume_position_print_bool {
+    \noindent
+    \bool_if:NTF \g_resume_position_first_listed_bool
+    {
+      \bool_gset_false:N \g_resume_position_first_listed_bool
+    }
+    {
+      \vfill\noindent
+    }
+    \minipage{\textwidth}
+
+    \cs_if_exist_use:cF
+      { resume_typeset_position__style_ #2 _begin: }
+      { \typeout { NO~SUCH~STYLE~#2 } }
+
+    \resume_maybe_write:n {
+      Position: \c_space_tl \exp_not:V \l_resume_position_title_tl   \iow_newline:
+      Company:  \c_space_tl \exp_not:V \l_resume_position_company_tl \iow_newline:
+      Date:     \c_space_tl \exp_not:V \l_resume_position_date_tl    \iow_newline:
+      Location: \c_space_tl \exp_not:V \l_resume_position_city_tl,   \c_space_tl
+                            \exp_not:V \l_resume_position_state_tl   \iow_newline:
+    }
+  } {
+    \comment
   }
 }
 {
-  \endminipage
-  \group_end:
-  \vspace{4ex plus 1ex minus 1ex}
+  \bool_if:NTF \l_resume_position_print_bool {
+    \cs_if_exist_use:cF
+      { resume_typeset_position__style_ #2 _end: }
+      { \typeout { NO~SUCH~STYLE~#2 } }
+    \endminipage
+  } {
+    \endcomment
+  }
 }
 
 \keys_define:nn { resume / project } {
@@ -186,9 +256,11 @@
   \group_begin:
   \keys_set:nn { resume / project } { #1 }
   \begin{tabular*}{\textwidth}{@{}l@{\extracolsep{\fill}}r@{}}
-    \tl_if_empty:NF \l_resume_project_ghkey_tl
-      { \href{\l_resume_project_link_tl} }
-    { \parbox{3cm}{\l_resume_project_title_tl} }
+    \parbox { 3cm } {
+      \resume_maybe_link:NN
+        \l_resume_project_link_tl
+        \l_resume_project_ghkey_tl
+    }
     \tl_if_empty:NF \l_resume_project_ghkey_tl
       { \qquad \texttt{\l_resume_project_ghkey_tl} }
     &

@@ -1,10 +1,11 @@
 \NeedsTeXFormat{LaTeX2e}[1994/06/01]
 \RequirePackage{expl3,xparse}
 \ProvidesExplClass
-{bettercv}
+{simplecv}
 {2013/12/23}
-{1.0}
-{A class for my resume/CV}
+{0.1}
+{A class for simply-defined resume/curricula vitae}
+
 \DeclareOption*{\PassOptionToClass{\CurrentOption}{article}}
 \ProcessOptions*
 \LoadClass{article}
@@ -27,8 +28,8 @@
 \RequirePackage{marvosym}
 
 \cs_new:Nn \resume_library_use:n {
-  \file_if_exist:nTF {./bettercv.#1.sty} {
-    \RequirePackage{bettercv.#1}
+  \file_if_exist:nTF {./simplecv.#1.sty} {
+    \RequirePackage{simplecv.#1}
     \clist_gpush:Nn \g_bettercv_loaded_libraries_clist { #1 }
     \use:c { bettercv_load_package_ #1 :}
   } {

@@ -9,6 +9,8 @@
 \ProcessOptions*
 \LoadClass{article}
 
+\clist_new:N \g_bettercv_loaded_libraries_clist
+
 \keys_define:nn { resume / options } {
   textout             .tl_gset:N   = \g_resume_options_output_text_file_tl,
   textout~preamble    .tl_gset:N   = \g_resume_options_output_text_preamble_tl,
@@ -17,18 +19,6 @@
 
 \NewDocumentCommand \BetterSetup { m } {
   \keys_set:nn { resume / options } { #1 }
-
-  \tl_if_empty:NF \g_resume_options_output_text_file_tl {
-    \iow_new:N \g_resume_output_text_iow
-    \iow_open:Nn \g_resume_output_text_iow { \g_resume_options_output_text_file_tl }
-
-    \ior_new:N \g_resume_output_text_preamble_ior
-    \ior_open:Nn \g_resume_output_text_preamble_ior { \g_resume_options_output_text_preamble_tl }
-
-    \ior_str_map_inline:Nn \g_resume_output_text_preamble_ior
-      { \iow_now:Nn \g_resume_output_text_iow { #1 }
-    }
-  }
 }
 
 
@@ -36,14 +26,26 @@
 \RequirePackage{verbatim}
 \RequirePackage{marvosym}
 
-\input{bettercv.helper}
-\input{bettercv.header}
-\input{bettercv.position}
-\input{bettercv.project}
-\input{bettercv.edu}
+\cs_new:Nn \resume_library_use:n {
+  \file_if_exist:nTF {./bettercv.#1.sty} {
+    \RequirePackage{bettercv.#1}
+    \clist_gpush:Nn \g_bettercv_loaded_libraries_clist { #1 }
+    \use:c { bettercv_load_package_ #1 :}
+  } {
+    \typeout{! ~ No ~ such ~ library ~ #1.}
+  }
+}
+
+\NewDocumentCommand \UseBetterCVLibrary { m } {
+  \clist_set:Nn \l_tmpa_clist { #1 }
+  \clist_map_function:NN \l_tmpa_clist \resume_library_use:n
+}
+
+\UseBetterCVLibrary{helper,header,position,project,edu,textfile}
 
 \pagestyle{empty}
 \setcounter{secnumdepth}{0}
+
 % Local Variables:
 % TeX-PDF-mode: t
 % TeX-master: "cv.tex"

@@ -1,3 +1,11 @@
+\NeedsTeXFormat{LaTeX2e}[1994/06/01]
+\RequirePackage{expl3,xparse}
+\ProvidesExplClass
+{bettercv.header}
+{2014/01/24}
+{1.0}
+{Typesetting contact information in BetterCV}
+
 \keys_define:nn { resume/contact } {
   street   .tl_set:N  = \l_resume_contact_street_tl,
   city     .tl_set:N  = \l_resume_contact_city_tl,
@@ -34,6 +42,7 @@
   \tl_set:Nn \l_resume_name_font_tl { #1 }
   \RequirePackage{fontspec}
 }
+
 
 % yes, i do mean \maketitle.  Whoever heard of a two-column resume?
 \RenewDocumentCommand \maketitle { }

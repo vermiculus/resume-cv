@@ -1,8 +1,10 @@
-\cs_new:Nn \resume_maybe_write:n {
-  \tl_if_empty:NF \g_resume_options_output_text_file_tl {
-    \iow_now:Nx \g_resume_output_text_iow { #1 }
-  }
-}
+\NeedsTeXFormat{LaTeX2e}[1994/06/01]
+\RequirePackage{expl3,xparse}
+\ProvidesExplClass
+{bettercv.helper}
+{2014/01/24}
+{1.0}
+{Utility functions for BetterCV}
 
 \NewDocumentCommand \daterange { s m m o }
 {

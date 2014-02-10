@@ -11,7 +11,7 @@
   \IfBooleanTF{#1}
     {#2\thinspace\textendash\thinspace(#3)}
     {#2\thinspace\textendash\thinspace#3}
-  \IfValueT { #4 } { \nobreakspace [#4] }
+  \IfValueT { #4 } { \nobreakspace #4 }
 }
 
 \NewDocumentCommand \Embrace { s O{-0.1ex} m } { % punpunpunpunpun

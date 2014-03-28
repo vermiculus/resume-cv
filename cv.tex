@@ -19,6 +19,11 @@
 
 \IfFileExists{./contact-info.tex}{\input{contact-info}}{}
 
+\newif\ifgithub
+\githubtrue
+\newif\ifinterests
+\let\ifinterests\ifgithub
+
 \begin{document}
 \maketitle
 \vfill
@@ -257,7 +262,7 @@
   \software{Emacs}~\Lisp, Python, Java, and Objective~C.
 \end{itemize}
 \vfill
-\comment
+\ifgithub
 \subsection{Open Source Contributions \hfill \Embrace[-.2ex]{\ttfamily github.com/vermiculus}}
 
 I also maintain (or participate in) several open-source projects
@@ -325,7 +330,9 @@ I also maintain (or participate in) several open-source projects
   technical,
   technology = (LibGDX) Java,
 }
+\fi
 
+\ifinterests
 \subsection{Relevant Interests}
 I have several interests in which I have no formal training,
   but have significant experience.
@@ -346,9 +353,9 @@ Additional details on my projects and interests can be found at
   \url{http://vermiculus.github.io}.
 \vfill
 \vfill
+\fi
 \appendix
 \todos
-\endcomment
 \end{document}
 
 %%% Local Variables: 

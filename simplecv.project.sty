@@ -7,6 +7,9 @@
 {Typesetting projects in BetterCV}
 
 \keys_define:nn { resume / project } {
+  print       .bool_set:N = \l_resume_project_print_bool,
+  print       .default:n  = true,
+  print       .initial:n  = true,
   ghkey       .tl_set:N   = \l_resume_project_ghkey_tl,
   link        .tl_set:N   = \l_resume_project_link_tl,
   title       .tl_set:N   = \l_resume_project_title_tl,
@@ -15,11 +18,7 @@
   technology  .tl_set:N   = \l_resume_project_technology_tl,
   technical   .bool_set:N = \l_resume_project_technical_bool,
 }
-\NewDocumentCommand \project { m } {
-  \vspace{2ex plus .2ex minus .2ex}
-  \par\noindent
-  \group_begin:
-  \keys_set:nn { resume / project } { #1 }
+\cs_new_nopar:Npn \__yacv_project_typeset: {
   \begin{tabular*}{\textwidth}{@{}l@{\extracolsep{\fill}}r@{}}
     \parbox { 3cm } {
       \resume_maybe_link:NN
@@ -44,6 +43,14 @@
       \textreferencemark
     }
   }
+}
+\NewDocumentCommand \project { m } {
+  \group_begin:
+  \vspace{2ex plus .2ex minus .2ex}
+  \par\noindent
+  \keys_set:nn { resume / project } { #1 }
+  \bool_show:N \l_resume_project_print_bool
+  \bool_if:NT \l_resume_project_print_bool \__yacv_project_typeset:
   \group_end:
 }
 

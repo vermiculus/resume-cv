@@ -14,7 +14,7 @@
 
 \keys_define:nn { resume / options } {
   textout             .tl_gset:N   = \g_resume_options_output_text_file_tl,
-  textout~preamble    .tl_gset:N   = \g_resume_options_output_text_preamble_tl,
+  textout-preamble    .tl_gset:N   = \g_resume_options_output_text_preamble_tl,
   mark                .bool_gset:N = \g_resume_options_do_mark_bool,
 }
 

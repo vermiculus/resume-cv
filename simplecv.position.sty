@@ -8,15 +8,15 @@
 
 \keys_define:nn { resume / position }
 {
-  title       .tl_set:N   = \l_resume_position_title_tl,
-  date        .tl_set:N   = \l_resume_position_date_tl,
-  company     .tl_set:N   = \l_resume_position_company_tl,
-  state       .tl_set:N   = \l_resume_position_state_tl,
-  city        .tl_set:N   = \l_resume_position_city_tl,
-  titlelink   .tl_set:N   = \l_resume_position_titlelink_tl,
-  companylink .tl_set:N   = \l_resume_position_companylink_tl,
-  technical   .bool_set:N = \l_resume_position_technical_bool,
-  print       .bool_set:N = \l_resume_position_print_bool,
+  title        .tl_set:N   = \l_resume_position_title_tl,
+  date         .tl_set:N   = \l_resume_position_date_tl,
+  company      .tl_set:N   = \l_resume_position_company_tl,
+  state        .tl_set:N   = \l_resume_position_state_tl,
+  city         .tl_set:N   = \l_resume_position_city_tl,
+  title-link   .tl_set:N   = \l_resume_position_title_link_tl,
+  company-link .tl_set:N   = \l_resume_position_company_link_tl,
+  technical    .bool_set:N = \l_resume_position_technical_bool,
+  print        .bool_set:N = \l_resume_position_print_bool,
 }
 
 \bool_new:N \g_resume_position_first_listed_bool
@@ -36,12 +36,12 @@
     {
       \itshape
       \resume_maybe_link:NN
-        \l_resume_position_titlelink_tl
+        \l_resume_position_title_link_tl
         \l_resume_position_title_tl
     }
     &
     \resume_maybe_link:NN
-      \l_resume_position_companylink_tl
+      \l_resume_position_company_link_tl
       \l_resume_position_company_tl
     \\[0.5ex]
     {\l_resume_position_date_tl}
@@ -70,13 +70,13 @@
   \small
   \raggedleft
   \resume_maybe_link:NN
-    \l_resume_position_titlelink_tl
+    \l_resume_position_title_link_tl
     \l_resume_position_title_tl
   \\
   \l_resume_position_date_tl
   \\
   \resume_maybe_link:NN
-    \l_resume_position_companylink_tl
+    \l_resume_position_company_link_tl
     \l_resume_position_company_tl
   \\
   \l_resume_position_city_tl,~

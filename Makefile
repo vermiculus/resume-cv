@@ -1,5 +1,5 @@
 compile:
-	arara cv.tex
+	arara cv
 	make upload
 
 upload:

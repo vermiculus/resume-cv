@@ -1,4 +1,5 @@
-% arara: pdflatex
+% arara: xelatex
+% arara: xelatex
 \documentclass{simplecv}
 \BetterSetup{
   textout = \jobname.cv.txt,
@@ -6,6 +7,7 @@
 }
 
 \usepackage{additional-setup}
+\usepackage{ragged2e}
 
 \ContactInformation{
   name   = Dolan Duck,
@@ -21,15 +23,17 @@
 \IfFileExists{./contact-info.tex}{\input{contact-info}}{}
 
 \newif\ifmath
-\mathtrue
 \newif\ifgithub
-\githubtrue
 \newif\ifinterests
-\let\ifinterests\ifgithub
+
+\mathtrue
+\githubtrue
+\intereststrue
 
 \begin{document}
 \maketitle
 \vfill
+ \vfill \vfill
 \section{Technical Summary}
 \begin{minipage}{\textwidth}
 \begin{description}
@@ -49,7 +53,7 @@
   SQL,
   \TeX,
   and
-  \LaTeX 3
+  \LaTeX3\slash\texttt{expl3}
 
 \item[Software]
   \software{Emacs},
@@ -85,7 +89,7 @@
 \end{description}
 \end{minipage}
 
-\vfill
+\vfill\vfill
 \section{Education and Academic Experience}
 \begin{education}
   {
@@ -118,7 +122,7 @@
   See \url{http://github.com/vermiculus/ssa-tool}.
 \item[Abroad] Studied abroad at \href{http://www.ucd.ie}{University College Dublin} in the Republic of~Ireland.
   Worked with Dr.~P\'adraig~Cunningham researching named-entity recognition and social network
-  analysis in English literature. (\daterange{Jan.}{May}[2013])
+  analysis in English literature. (\daterange{Jan}{May}[2013])
   \\
   See \url{http://github.com/vermiculus/snael}.
 \end{description}
@@ -167,15 +171,31 @@
 \end{itemize}
 \end{position}
 
-\vfill
+\vfill\vfill
 \section{Professional Experience}
 
 \begin{position}
   {
-    title   = Junior Software Developer,
+    title   = Junior Software Dev.,
+    company = Epic Systems,
+    company-link = http://www.epic.com,
+    date    = \daterange*{Jan 2015}{Present},
+    city    = Verona,
+    state   = WI,
+    technical,
+  }
+
+\begin{itemize}
+\item To be determined\dots
+\end{itemize}
+\end{position}
+
+\begin{position}
+  {
+    title   = Junior Software Dev.,
     company = General Dynamics,
     company-link = http://www.gd-ais.com,
-    date    = \daterange*{June 2014}{Present},
+    date    = \daterange{June 2014}{Jan 2015},
     city    = Fairfax,
     state   = VA,
     technical,
@@ -193,7 +213,7 @@
     title   = Server Administrator,
     company = St. Mary's College,
     company-link = http://www.smcm.edu/mathcs,
-    date    = \daterange{Sept. 2013}{May 2014},
+    date    = \daterange{Sept 2013}{May 2014},
     city    = St. Mary's City,
     state   = MD,
     technical,
@@ -211,7 +231,7 @@
     title   = Intern,
     company = {Progeny Systems, Inc.},
     company-link = http://progeny.net,
-    date    = \daterange{May}{Sept.}[2013],
+    date    = \daterange{May}{Sept}[2013],
     city    = California,
     state   = MD,
     technical,
@@ -266,11 +286,15 @@
   improve hiring workflow for multiple offices in the tri-state area.
 \end{itemize}
 \end{position}
-\vfill
+\vfill \vfill \vfill \vfill % \vfill \vfill \vfill \vfill
+%\vfill \vfill \vfill \vfill \vfill \vfill \vfill \vfill
+
+\newpage
+~\vfill
 \section{Personal Information}
 \begin{itemize}
 \item Experienced user of \LaTeX, a system used to produce documents
-  of high quality and consistency.
+  of high quality and typographical consistency.
 \item Currently an official representative of
   \href{http://meta.tex.stackexchange.com/a/4174/17423}{StackExchange}
   to the international \href{http://www.tug.org}{\TeX\ User's Group}.
@@ -282,13 +306,15 @@
   using more conventional languages, such as
   \software{Emacs}~\Lisp, Python, Java, and Objective~C.
 \end{itemize}
-\vfill
+
 \ifgithub
+\vfill\vfill
 \section{Open Source Contributions \hfill \Embrace{\ttfamily github.com/vermiculus}}
 
 I also maintain (or participate in) several open-source projects
   using more conventional languages,
-  including \Lisp, Python, Java, and Objective~C.
+  including \Lisp, Python, Java, and the C~languages.
+(This does not include the many discussion-based contributions I've made.)
 
 \project{
   title       = StackAPI,
@@ -300,11 +326,11 @@ I also maintain (or participate in) several open-source projects
 }
 
 \project{
-  title       = StackMode,
+  title       = \cli{sx.el},
   description = An ongoing project to create a full-featured StackExchange Mode for \software{Emacs},
   date        = \daterange*{2013}{Current},
-  ghkey       = vermiculus/stack-mode,
-  link        = https://www.github.com/vermiculus/stack-mode,
+  ghkey       = vermiculus/sx.el,
+  link        = https://www.github.com/vermiculus/sx.el,
   technology  = \software{Emacs} \Lisp,
   technical,
 }
@@ -322,7 +348,7 @@ I also maintain (or participate in) several open-source projects
 \project{
   title       = \Acronym{SNAEL},
   description = A natural language analyzer that constructs social networks,
-  date        = \daterange{Jan.}{May.}[2013],
+  date        = \daterange{Jan}{May}[2013],
   link        = https://github.com/vermiculus/snael,
   ghkey       = vermiculus/snael,
   technology  = Python,
@@ -344,7 +370,7 @@ I also maintain (or participate in) several open-source projects
   description = An extension to \AucTeX\ to support embedded Lua code,
   link        = https://www.github.com/vermiculus/auctex-lua,
   ghkey       = vermiculus/auctex-lua,
-  date        = \daterange{Aug.}{Aug.}[2013],
+  date        = \daterange{Aug}{Aug}[2013],
   technical,
   technology  = \software{Emacs} \Lisp,
 }
@@ -352,7 +378,7 @@ I also maintain (or participate in) several open-source projects
 \project{
   title       = ButterSeal,
   description = An Android game written for \course{Game Design and Development},
-  date        = \daterange{Sept.}{Dec.}[2013],
+  date        = \daterange{Sept}{Dec}[2013],
   link        = https://www.github.com/vermiculus/butterseal,
   ghkey       = vermiculus/butterseal,
   technical,
@@ -360,7 +386,7 @@ I also maintain (or participate in) several open-source projects
 }
 
 \project{
-  title       = C-UTIL,
+  title       = C-\textsc{util},
   description = A set of object-oriented utilities for ANSI C,
   link        = https://www.github.com/vermiculus/c-utils,
   ghkey       = vermiculus/c-util,
@@ -393,33 +419,43 @@ I also maintain (or participate in) several open-source projects
 I have several interests in which I have no formal training,
   but have significant experience.
 These include:
-\begin{itemize}[itemindent=2em,topsep=1ex]
+
+\bigskip
+
+\begin{minipage}[t]{.55\linewidth}
+\begin{itemize} \RaggedRight
 \item structured documents, especially in the context of $\downarrow$
 \item literate programming \Dash a documentation-centric paradigm
-  for software development,
-\item textual typography,
-  and
-\item custom electronics.
+  for software development and reproducible research,
 \end{itemize}
-
+\end{minipage}
+\hfill
+\begin{minipage}[t]{.4\linewidth}
+  \begin{itemize}
+  \item custom electronics, and
+  \item typography.
+  \end{itemize}
+\end{minipage}
 \vfill
 \vfill
 
 \centering
 Additional details on my projects and interests can be found at
-  \url{http://vermiculus.github.io}.
+  \url{http://www.seanallred.com}.
 \vfill
 \vfill
 \fi
 \appendix
-\todos
+
 \end{document}
 
-%%% Local Variables: 
+%%% Local Variables:
 %%% mode: latex
 %%% TeX-master: t
-%%% TeX-PDF-mode: t 
-%%% End: 
+%%% TeX-PDF-mode: t
+%%% TeX-command-default: "arara"
+%%% TeX-engine: xetex
+%%% End:
 
 %  LocalWords:  gpa adraig Jamieson Mathematica Powerpoint OneNote
 %  LocalWords:  JSON cli YASCA Camtasia tri PDF PostgreSQL Visio CTAN

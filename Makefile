@@ -1,6 +1,4 @@
-compile:
-	arara cv
-	$(MAKE) upload
-
-upload:
-	scp cv.pdf seaall6@beehive.dreamhost.com:seanallred.com/sean-allred.pdf
+cv.pdf: cv.tex
+	arara cv.tex
+	mkdir -p ~/blog/assets
+	cp cv.pdf ~/blog/assets/cv.pdf

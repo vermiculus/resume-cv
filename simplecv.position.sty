@@ -100,6 +100,16 @@
 {
   \keys_set:nn { resume / position } { print=true }
   \keys_set:nn { resume / position } { #1 }
+  \IfCensoredTF {
+    \keys_set:nn { resume / position } {
+      date         = \daterange{1914}{1918},
+      company      = King's~Army,
+      state        = Some~State,
+      city         = Some~City,
+      title-link   = http://www.example.com,
+      company-link = http://www.example.com,
+    }
+  } {}
   \bool_if:NTF \l_resume_position_print_bool {
     \noindent
     \bool_if:NTF \g_resume_position_first_listed_bool

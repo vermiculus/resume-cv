@@ -5,13 +5,14 @@
   textout = \jobname.cv.txt,
   textout-preamble = preamble.txt,
 }
+%\CensorInformation
 
 \usepackage{additional-setup}
 \usepackage{ragged2e}
 
 \ContactInformation{
   name   = Dolan Duck,
-  email  = dolanduck@stackexchange.com,
+  email  = dolanduck@tex.stackexchange.com,
   url    = http://tex.stackexchange.com,
   phone  = 123\,456\,7890,
   street = 123 Duck Lane,
@@ -20,27 +21,10 @@
   zip    = duuuuuuck,
 }
 
-
 \newif\ifmath
 \newif\ifgithub
 \newif\ifinterests
 
-\usepackage{censor}
-\StopCensoring
-\ExplSyntaxOn
-\makeatletter
-\NewDocumentCommand \IfCensoredTF { m m } { \cs_if_eq:NNTF \censor \un@censor {#2} {#1} }
-\makeatother
-
-\cs_set_eq:NN \sean_old_href:nn \href
-\cs_set_eq:NN \sean_old_url:n \url
-\cs_set:Npn \href #1#2 {
-  \exp_args:Nf \sean_old_href:nn { \IfCensoredTF { http://www.example.com } {#1} } {#2}
-}
-\cs_set:Npn \url #1 {
-  \exp_args:Nf \sean_old_url:n { \IfCensoredTF { http://www.example.com } {#1} }
-}
-\ExplSyntaxOff
 \IfCensoredTF{}{\IfFileExists{./contact-info.tex}{\input{contact-info}}{}}
 
 \mathtrue

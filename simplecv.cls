@@ -42,7 +42,7 @@
   \clist_map_function:NN \l_tmpa_clist \resume_library_use:n
 }
 
-\UseBetterCVLibrary{helper,header,position,project,edu,textfile}
+\UseBetterCVLibrary{helper,header,position,project,edu,textfile,censor}
 
 \pagestyle{empty}
 \setcounter{secnumdepth}{0}

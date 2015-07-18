@@ -1,0 +1,30 @@
+\NeedsTeXFormat{LaTeX2e}[1994/06/01]
+\RequirePackage{expl3,xparse}
+\ProvidesExplClass
+{simplecv.censor}
+{2015/07/15}
+{0.1}
+{Censoring information in BetterCV}
+
+\RequirePackage{censor}
+
+\NewDocumentCommand \IfCensoredTF { m m }
+  { \cs_if_eq:NNTF \censor \un@censor {#2} {#1} }
+
+\cs_set_eq:NN \sean_old_href:nn \href
+\cs_set_eq:NN \sean_old_url:n \url
+\cs_set:Npn \href #1#2 {
+  \exp_args:Nf \sean_old_href:nn { \IfCensoredTF { http://www.example.com } {#1} } {#2}
+}
+\cs_set:Npn \url #1 {
+  \exp_args:Nf \sean_old_url:n { \IfCensoredTF { http://www.example.com } {#1} }
+}
+
+\StopCensoring
+
+\NewDocumentCommand \CensorInformation { } { \RestartCensoring }
+
+%%% Local Variables: 
+%%% mode: expl3
+%%% TeX-master: "cv.tex"
+%%% End: 

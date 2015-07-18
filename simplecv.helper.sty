@@ -6,13 +6,20 @@
 {0.1}
 {Utility functions for BetterCV}
 
-\NewDocumentCommand \daterange { s m m o }
-{
-  \IfBooleanTF{#1}
-    { #2 \thinspace \textendash \thinspace (#3) }
-    { #2 \thinspace \textendash \thinspace  #3  }
-  \IfValueT {#4} { \nobreakspace #4 }
-}
+\seq_new:N \l__resume_tmp_seq
+\tl_new:N  \l__resume_tmp_tl
+\cs_new_protected:Nn \resume_dates:n
+  {
+    \tl_set:Nn \l__resume_tmp_tl {#1}
+    \tl_replace_all:Nnn \l__resume_tmp_tl { * } { (Current) }
+    \tl_replace_all:Nnn \l__resume_tmp_tl { - }
+      { \unskip \thinspace \textendash \thinspace \ignorespaces }
+    \tl_use:N \l__resume_tmp_tl
+  }
+\cs_generate_variant:Nn \resume_dates:n { V }
+
+\NewDocumentCommand \dates { m }
+  { \resume_dates:n {#1} }
 
 \NewDocumentCommand \Embrace { s O{-0.1ex} m } { % punpunpunpunpun
   \IfBooleanTF{#1}{\phantom{\raisebox{#2}{\texttt{\{}}}}

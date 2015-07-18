@@ -12,14 +12,12 @@
   degree       .tl_set:N   = \l_resume_education_degree_tl,
   gpa          .tl_set:N   = \l_resume_education_gpa_tl,
   major-gpa    .tl_set:N   = \l_resume_education_major_gpa_tl,
-  start        .tl_set:N   = \l_resume_education_startyear_tl,
-  end          .tl_set:N   = \l_resume_education_endyear_tl,
+  date         .tl_set:N   = \l_resume_education_date_tl,
   school       .tl_set:N   = \l_resume_education_school_tl,
   state        .tl_set:N   = \l_resume_education_state_tl,
   city         .tl_set:N   = \l_resume_education_city_tl,
   school-link  .tl_set:N   = \l_resume_education_school_link_tl,
   transcript   .tl_set:N   = \l_resume_education_transcript_link_tl,
-  current      .bool_set:N = \l_resume_education_current_bool,
   print        .bool_set:N = \l_resume_education_print_bool,
 }
 
@@ -84,9 +82,9 @@
     \l_resume_education_school_link_tl
     \l_resume_education_school_tl
   \\
-  \bool_if:NTF \l_resume_education_current_bool { \daterange* } { \daterange }
-    {\l_resume_education_startyear_tl}
-    {\l_resume_education_endyear_tl}
+
+  \resume_dates:V \l_resume_education_date_tl
+
   \\
   \l_resume_education_city_tl,~
   \l_resume_education_state_tl
@@ -113,8 +111,7 @@
   \keys_set:nn { resume / education } { #1 }
   \IfCensoredTF {
     \keys_set:nn { resume / education } {
-      start = 1939,
-      end = 1945,
+      date = 1939-1945,
       school = Some~School,
       state = Some~State,
       city = Some~City,

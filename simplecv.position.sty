@@ -44,7 +44,7 @@
       \l_resume_position_company_link_tl
       \l_resume_position_company_tl
     \\[0.5ex]
-    {\l_resume_position_date_tl}
+    \resume_dates:V \l_resume_position_date_tl
     &
     {\l_resume_position_city_tl}, ~ {\l_resume_position_state_tl}
   \end{tabular*}
@@ -73,7 +73,7 @@
     \l_resume_position_title_link_tl
     \l_resume_position_title_tl
   \\
-  \l_resume_position_date_tl
+  \resume_dates:V \l_resume_position_date_tl
   \\
   \resume_maybe_link:NN
     \l_resume_position_company_link_tl
@@ -102,7 +102,7 @@
   \keys_set:nn { resume / position } { #1 }
   \IfCensoredTF {
     \keys_set:nn { resume / position } {
-      date         = \daterange{1914}{1918},
+      date         = 1914-1918,
       company      = King's~Army,
       state        = Some~State,
       city         = Some~City,
@@ -148,6 +148,6 @@
 }
 
 %%% Local Variables: 
-%%% mode: latex
+%%% mode: expl3
 %%% TeX-master: "cv.tex"
 %%% End: 

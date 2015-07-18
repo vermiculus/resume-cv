@@ -1,5 +1,5 @@
 % arara: xelatex
-% arara: xelatex
+% arara: make: { task: "cv.png" }
 \documentclass{simplecv}
 \BetterSetup{
   textout = \jobname.cv.txt,
@@ -18,7 +18,7 @@
   street = 123 Duck Lane,
   city   = Duckville,
   state  = Duckota,
-  zip    = duuuuuuck,
+  zip    = 211 145 63,
 }
 
 \newif\ifmath
@@ -173,7 +173,6 @@
 \end{itemize}
 \end{position}
 
-\vfill\vfill
 \section{Professional Experience}
 
 \begin{position}
@@ -279,6 +278,7 @@
     city    = Silver Spring,
     state   = MD,
     date    = 2008-2011,
+    print   = false,
     technical,
   }
 
@@ -329,7 +329,7 @@ I also maintain (or participate in) several open-source projects
 
 \project{
   title       = \cli{sx.el},
-  description = An ongoing project to create a full-featured StackExchange Mode for \software{Emacs},
+  description = An ongoing project to create a full-featured StackExchange mode for \software{Emacs},
   date        = 2013-*,
   ghkey       = vermiculus/sx.el,
   link        = https://www.github.com/vermiculus/sx.el,
@@ -416,35 +416,34 @@ I also maintain (or participate in) several open-source projects
 \fi
 
 \ifinterests
-\vfill
 \section{Relevant Interests}
 I have several interests in which I have no formal training,
   but have significant experience.
 These include:
 
-\bigskip
+\vfill
 
-\begin{minipage}[t]{.55\linewidth}
-\begin{itemize} \RaggedRight
-\item structured documents, especially in the context of $\downarrow$
-\item literate programming \Dash a documentation-centric paradigm
-  for software development and reproducible research,
-\end{itemize}
+% This hackery was to make the two columns different widths.
+% Normally, you should use multicol or vwcol to make multiple columns.
+\begin{minipage}[t]{0.55\linewidth}
+  \begin{itemize}\RaggedRight
+  \item structured documents, especially in the context of $\downarrow$
+  \item literate programming \Dash a documentation-centric paradigm
+    for software development and reproducible research,
+  \end{itemize}
 \end{minipage}
 \hfill
-\begin{minipage}[t]{.4\linewidth}
+\begin{minipage}[t]{0.4\linewidth}
   \begin{itemize}
   \item custom electronics, and
   \item typography.
   \end{itemize}
 \end{minipage}
 \vfill
-\vfill
 
 \centering
 Additional details on my projects and interests can be found at
   \url{http://www.seanallred.com}.
-\vfill
 \vfill
 \fi
 \end{document}

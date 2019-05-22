@@ -37,14 +37,23 @@
 
 \newcommand \course[1]   {\textit{#1}}
 \newcommand \software[1] {\textsl{#1}}
-\newcommand \transcript  {https://dl.dropboxusercontent.com/u/17471132/static/transcript.pdf}
 
 \newcommand \CPP        {{C\nolinebreak[4]\hspace{-.05em}\raisebox{.4ex}{\tiny\bf ++}}}
-\newcommand \CSharp     {{C\#}}
-\newcommand \Lisp       {{\textsc{Lisp}}}
+\newcommand \CSharp     {{C\raisebox{.2ex}{\#}}}
+\newcommand \Lisp       {{Lisp}}
 \newcommand \AucTeX     {{\textsc{Auc}\TeX}}
+\newcommand \StMarys    {St.\,Mary's\xspace}
 
 \let\cli\texttt
+
+\newcommand\GHstar[2]{#1 {\large$\star$}{\small#2}}
+\newcommand\inputposition[1]{\input{input/pos/#1}}
+\newcommand\inputeducation[1]{\input{input/edu/#1}}
+\newcommand\inputproject[1]{\input{input/prj/#1}}
+
+\usepackage{ragged2e,array}
+\newcolumntype{H}{>{\RaggedRight}p{.42\textwidth}}
+
 
 % Local Variables:
 % TeX-PDF-mode: t

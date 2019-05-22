@@ -33,6 +33,12 @@
   \tl_if_empty:NF #1 { \href{#1} } { #2 }
 }
 
+\cs_new:Nn \resume_maybe_link:NNN {
+  \bool_if:nT { #1 && !\tl_if_empty_p:N #2 }
+    { \href{#2} }
+  { #3 }
+}
+
 \cs_new:Nn \resume_make_as_acronym:n {
   \seq_set_split:Nnn \l_tmpa_seq {} { #1 }
   \seq_use:Nn \l_tmpa_seq {.\,}

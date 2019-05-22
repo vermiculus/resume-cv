@@ -17,16 +17,25 @@
   date        .tl_set:N   = \l_resume_project_date_tl,
   technology  .tl_set:N   = \l_resume_project_technology_tl,
   technical   .bool_set:N = \l_resume_project_technical_bool,
+  ghactive    .bool_set:N = \l_resume_project_ghactive_bool,
+  ghactive    .default:n  = true,
+  ghactive    .initial:n  = true,
 }
 \cs_new_nopar:Npn \__yacv_project_typeset: {
   \begin{tabular*}{\textwidth}{@{}l@{\extracolsep{\fill}}r@{}}
     \parbox { 3cm } {
-      \resume_maybe_link:NN
+      \resume_maybe_link:NNN
+        \l_resume_project_ghactive_bool
         \l_resume_project_link_tl
         \l_resume_project_title_tl
     }
-    \tl_if_empty:NF \l_resume_project_ghkey_tl
-      { \qquad \texttt{\l_resume_project_ghkey_tl} }
+    \bool_if:NTF \l_resume_project_ghactive_bool
+      {
+        \tl_if_empty:NF \l_resume_project_ghkey_tl
+          { \qquad \texttt{\l_resume_project_ghkey_tl} }
+      } {
+          \qquad (inactive)
+      }
     &
     {\l_resume_project_technology_tl} \\[0.5ex]
     {\l_resume_project_description_tl}

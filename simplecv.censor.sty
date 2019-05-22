@@ -14,10 +14,10 @@
 \cs_set_eq:NN \sean_old_href:nn \href
 \cs_set_eq:NN \sean_old_url:n \url
 \cs_set:Npn \href #1#2 {
-  \exp_args:Nf \sean_old_href:nn { \IfCensoredTF { http://www.example.com } {#1} } {#2}
+  \exp_args:Nf \sean_old_href:nn { \IfCensoredTF { https://www.example.com } {#1} } {#2}
 }
 \cs_set:Npn \url #1 {
-  \exp_args:Nf \sean_old_url:n { \IfCensoredTF { http://www.example.com } {#1} }
+  \exp_args:Nf \sean_old_url:n { \IfCensoredTF { https://www.example.com } {#1} }
 }
 
 \StopCensoring

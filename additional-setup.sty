@@ -49,7 +49,7 @@
 \newcommand\GHstar[2]{#1 {\large$\star$}{\small#2}}
 \newcommand\inputposition[1]{\input{input/pos/#1}}
 \newcommand\inputeducation[1]{\input{input/edu/#1}}
-\newcommand\inputproject[1]{\input{input/prj/#1}}
+\newcommand\inputproject[1]{\IfCensoredTF{\input{input/prj/dummy}}{\input{input/prj/#1}}}
 
 \usepackage{ragged2e,array}
 \newcolumntype{H}{>{\RaggedRight}p{.42\textwidth}}

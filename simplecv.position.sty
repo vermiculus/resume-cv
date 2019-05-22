@@ -16,7 +16,6 @@
   title-link   .tl_set:N   = \l_resume_position_title_link_tl,
   company-link .tl_set:N   = \l_resume_position_company_link_tl,
   technical    .bool_set:N = \l_resume_position_technical_bool,
-  print        .bool_set:N = \l_resume_position_print_bool,
 }
 
 \bool_new:N \g_resume_position_first_listed_bool
@@ -95,19 +94,17 @@
 
 \NewDocumentEnvironment { position } { m O{cramped} }
 {
-  \keys_set:nn { resume / position } { print=true }
   \keys_set:nn { resume / position } { #1 }
-  \IfCensoredTF {
-    \keys_set:nn { resume / position } {
-      date         = 1914-1918,
-      company      = King's~Army,
-      state        = Some~State,
-      city         = Some~City,
-      title-link   = http://www.example.com,
-      company-link = http://www.example.com,
-    }
-  } {}
-  \bool_if:NTF \l_resume_position_print_bool {
+    \IfCensoredTF {
+      \keys_set:nn { resume / position } {
+        date         = 1914-1918,
+        company      = King's~Army,
+        state        = Some~State,
+        city         = Some~City,
+        title-link   = http://www.example.com,
+        company-link = http://www.example.com,
+      }
+    } {}
     \noindent
     \bool_if:NTF \g_resume_position_first_listed_bool
     {
@@ -129,19 +126,12 @@
       Location: \c_space_tl \exp_not:V \l_resume_position_city_tl,   \c_space_tl
                             \exp_not:V \l_resume_position_state_tl   \iow_newline:
     }
-  } {
-    \comment
-  }
 }
 {
-  \bool_if:NTF \l_resume_position_print_bool {
     \cs_if_exist_use:cF
       { resume_typeset_position__style_ #2 _end: }
       { \typeout { NO~SUCH~STYLE~#2 } }
     \endminipage
-  } {
-    \endcomment
-  }
 }
 
 %%% Local Variables:

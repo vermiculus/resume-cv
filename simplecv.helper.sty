@@ -22,11 +22,11 @@
   { \resume_dates:n {#1} }
 
 \NewDocumentCommand \Embrace { s O{-0.1ex} m } { % punpunpunpunpun
-  \IfBooleanTF{#1}{\phantom{\raisebox{#2}{\texttt{\{}}}}
-                  {         \raisebox{#2}{\texttt{\{}}}
+  \IfBooleanTF{#1}{\phantom{\raisebox{#2}{\textrm\{}}}
+                  {         \raisebox{#2}{\textrm\{}}
   #3
-  \IfBooleanTF{#1}{\phantom{\raisebox{#2}{\texttt{\}}}}}
-                  {         \raisebox{#2}{\texttt{\}}}}
+  \IfBooleanTF{#1}{\phantom{\raisebox{#2}{\textrm\}}}}
+                  {         \raisebox{#2}{\textrm\}}}
 }
 
 \cs_new:Nn \resume_maybe_link:NN {

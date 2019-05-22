@@ -46,10 +46,13 @@
 }
 \NewDocumentCommand \project { m } {
   \group_begin:
-  \vspace{2ex plus .2ex minus .2ex}
-  \par\noindent
   \keys_set:nn { resume / project } { #1 }
-  \bool_if:NT \l_resume_project_print_bool \__yacv_project_typeset:
+  \bool_if:NT \l_resume_project_print_bool
+  {
+    \vspace{2ex plus .2ex minus .2ex}
+    \par\noindent
+    \__yacv_project_typeset:
+  }
   \group_end:
 }
 

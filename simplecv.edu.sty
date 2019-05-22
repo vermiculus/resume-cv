@@ -22,10 +22,7 @@
 }
 
 \bool_new:N \g_resume_education_first_listed_bool
-\NewDocumentCommand \DeclareFirstEducation { }
-{ \bool_gset_true:N \g_resume_education_first_listed_bool }
-
-\DeclareFirstEducation
+\bool_gset_true:N \g_resume_education_first_listed_bool
 
 \cs_new:Nn \resume_typeset_education__style_spaced_end: {
   \vspace{4ex plus 1ex minus 1ex}

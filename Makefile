@@ -8,5 +8,5 @@ publish: cv.pdf
 	mkdir -p ~/git/seanallred.com/static
 	cp cv.pdf ~/git/seanallred.com/static/resume--allred-sean.pdf
 	@printf "Don't forget to git-push"
-cv.png:
-	convert -density 150 -alpha remove cv.pdf cv.png
+cv.png: cv.pdf
+	convert -density 150 -alpha remove cv.pdf +append cv.png

@@ -6,6 +6,9 @@
 }
 %\CensorInformation
 
+\let\emph\relax % there's no \RedeclareTextFontCommand
+\DeclareTextFontCommand{\emph}{\bfseries\boldmath}
+
 \usepackage{additional-setup}
 
 \ContactInformation{

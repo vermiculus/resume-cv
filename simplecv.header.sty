@@ -12,6 +12,7 @@
   state    .tl_set:N  = \l_resume_contact_state_tl,
   zip      .tl_set:N  = \l_resume_contact_zip_tl,
   name     .tl_set:N  = \l_resume_contact_name_tl,
+  tagline  .tl_set:N  = \l_resume_contact_tagline_tl,
   phone    .tl_set:N  = \l_resume_contact_phone_tl,
   email    .tl_set:N  = \l_resume_contact_email_tl,
   url      .tl_set:N  = \l_resume_contact_url_tl,
@@ -24,6 +25,7 @@
   \resume_maybe_write:n
   {
     \exp_not:V \l_resume_contact_name_tl   \iow_newline:
+    \exp_not:V \l_resume_contact_tagline_tl \iow_newline:
     \exp_not:V \l_resume_contact_email_tl  \iow_newline:
     \exp_not:V \l_resume_contact_phone_tl  \iow_newline:
                                            \iow_newline:
@@ -53,6 +55,8 @@
       { \fontspec[Path=fonts/]{\tl_use:N \l_resume_name_font_tl} }
     \Huge \hspace{-1em}
     \l_resume_contact_name_tl
+    \hspace{1em}
+    \parbox[b]{.5\linewidth}{\small \l_resume_contact_tagline_tl}
   \end{minipage}
   \hfill
   \begin{minipage}{.4\linewidth}
@@ -64,7 +68,7 @@
   \end{minipage}
 }
 
-%%% Local Variables: 
+%%% Local Variables:
 %%% mode: latex
 %%% TeX-master: "cv.tex"
-%%% End: 
+%%% End:
